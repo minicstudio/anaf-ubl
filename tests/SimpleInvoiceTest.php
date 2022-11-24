@@ -1,6 +1,6 @@
 <?php
 
-namespace NumNum\UBL\Tests;
+namespace MinicStudio\UBL\Tests;
 
 use PHPUnit\Framework\TestCase;
 
