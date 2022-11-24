@@ -47,21 +47,13 @@ class Transport implements XmlSerializable
     {
         $this->validate();
 
-        $writer->writeAttribute('codeDeclarant', $this->codDeclarant);
+        $writer->writeAttributes([
+            'xsi:schemaLocation' => 'mfp:anaf:dgti:eTransport:declaratie:v1',
+            'codeDeclarant' => $this->codDeclarant,
+        ]);
 
         $writer->write([
             'notificare' => $this->notificare,
         ]);
-
-
-        // $writer->write([
-        //     [
-        //         'name' => 'notificare',
-        //         'value' => $this->notificare,
-        //         'attributes' => [
-        //             'codTipOperatiune' => 30,
-        //         ],
-        //     ],
-        // ]);
     }
 }

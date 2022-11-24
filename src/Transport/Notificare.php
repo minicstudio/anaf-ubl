@@ -62,10 +62,6 @@ class Notificare implements XmlSerializable
 
         $writer->writeAttribute('codTipOperatiune', '30');
 
-        $writer->write([
-            'SomeData' => 'asd',
-        ]);
-
         foreach ($this->items as $item) {
             $writer->write([
                 'bunuriTransportate' => $item,

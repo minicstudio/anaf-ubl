@@ -17,16 +17,16 @@ class TransportTest extends TestCase
 {
     public function testTransportXML()
     {
+        $partner = (new Partner)
+            ->setCountryCode('RO')
+            ->setCode('1234567')
+            ->setName('Minic Studio');
+
+        $items = [(new TransportItem)];
+
         $notificare = (new Notificare)
-            ->setPartner(
-                (new Partner)
-                    ->setCountryCode('RO')
-                    ->setCode('1234567')
-                    ->setName('Minic Studio')
-            )
-            ->setItems([
-                (new TransportItem),
-            ]);
+            ->setPartner($partner)
+            ->setItems($items);
 
         $transport = (new Transport())
             ->setCodeDeclarant('1234567')

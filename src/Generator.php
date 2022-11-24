@@ -46,9 +46,7 @@ class Generator
 
         $xmlService->namespaceMap = [
             'mfp:anaf:dgti:eTransport:declaratie:v1' => '',
-            // 'xsi' => "http://www.w3.org/2001/XMLSchema-instance",
-            // 'xsi:schemaLocation="mfp:anaf:dgti:eTransport:declaratie:v1 file:/D:/formInteractive/_inLucru/_proiecte/eTransport/final/SchemaSimtic_model_2022_03_15.xsd"',
-            // 'codDeclarant' => "1234567",
+            'http://www.w3.org/2001/XMLSchema-instance' => 'xsi',
         ];
 
         return $xmlService->write('eTransport', $transport);
