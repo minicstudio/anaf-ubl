@@ -38,7 +38,7 @@ class OperationTypeCode implements XmlSerializable
     {
         $this->validate();
 
-        $writer->writeAttributes ([
+        $writer->write([
             'codTipOperatiune' => $this->operation_type_code,
         ]);
     }

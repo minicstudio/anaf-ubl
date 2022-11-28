@@ -107,11 +107,19 @@ class Date implements XmlSerializable
         $this->validate();
 
         $writer->writeAttributes([
-            'carNumber' => $this->car_number,
-            'codTara' => $this->country_code,
-            'cod' => $this->code,
-            'denumire' => $this->name,
-            'date' => $this->date,
+            // 'carNumber' => $this->car_number,
+            // 'codTara' => $this->country_code,
+            // 'cod' => $this->code,
+            // 'denumire' => $this->name,
+            // 'date' => $this->date,
+
+        
+            'nrVehicul' => "B111ABC",
+            'codTaraTransportator' => "RO",
+            'codTransportator' => "38575952",
+            'denumireTransportator' => "SME MITANI TRANSPORT",
+            'dataTransport' => "2006-05-04",
+            'codBirouVamal' => "12801",
         ]);
     }
 }

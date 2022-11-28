@@ -21,7 +21,7 @@ class Transport implements XmlSerializable
      * @param string $codDeclarant
      * @return self
      */
-    public function setCodeDeclarant(string $codDeclarant): self
+    public function setCodDeclarant(string $codDeclarant): self
     {
         $this->codDeclarant = $codDeclarant;
 
@@ -85,18 +85,6 @@ class Transport implements XmlSerializable
         if (!$this->refDeclarant) {
             throw new InvalidArgumentException('Declarant reference is missing!');
         }
-
-        if (!$this->notificare) {
-            throw new InvalidArgumentException('Notificare is missing!');
-        }
-
-        if (!$this->confirmation) {
-            throw new InvalidArgumentException('confirmation is missing!');
-        }
-
-        if (!$this->delete) {
-            throw new InvalidArgumentException('Uit don\'t exist!');
-        }
     }
 
     /**
@@ -110,7 +98,7 @@ class Transport implements XmlSerializable
 
         $writer->writeAttributes([
             'xsi:schemaLocation' => 'mfp:anaf:dgti:eTransport:declaratie:v1',
-            'codeDeclarant' => $this->codDeclarant,
+            'codDeclarant' => $this->codDeclarant,
             'refDeclarant' => $this->refDeclarant,
         ]);
 
