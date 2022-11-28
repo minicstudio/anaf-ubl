@@ -6,12 +6,26 @@ use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
-class Partner implements XmlSerializable
+class Date implements XmlSerializable
 {
+    private $car_number;
     private $country_code;
     private $code;
     private $name;
+    private $date;
     
+    /**
+     * Set the car number
+     * @param string $car_number
+     * @return self
+     */
+    public function setCarNumber(string $car_number): self
+    {
+        $this->car_number = $car_number;
+
+        return $this;
+    }
+
     /**
      * Set the country code
      * @param string $country_code
@@ -25,7 +39,7 @@ class Partner implements XmlSerializable
     }
 
     /**
-     * Set the code
+     * Set code
      * @param string $code
      * @return self
      */
@@ -48,8 +62,24 @@ class Partner implements XmlSerializable
         return $this;
     }
 
+    /**
+     * Set the country code
+     * @param string $date
+     * @return self
+     */
+    public function setdate(string $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
     public function validate()
     {
+        if (!$this->car_number) {
+            throw new InvalidArgumentException('Car number is not provided!');
+        }
+
         if (!$this->country_code) {
             throw new InvalidArgumentException('Country code is not provided!');
         }
@@ -60,6 +90,10 @@ class Partner implements XmlSerializable
 
         if (!$this->name) {
             throw new InvalidArgumentException('Name is not provided!');
+        }
+
+        if (!$this->date) {
+            throw new InvalidArgumentException('Date is not provided!');
         }
     }
 
@@ -73,9 +107,11 @@ class Partner implements XmlSerializable
         $this->validate();
 
         $writer->writeAttributes([
+            'carNumber' => $this->car_number,
             'codTara' => $this->country_code,
             'cod' => $this->code,
             'denumire' => $this->name,
+            'date' => $this->date,
         ]);
     }
 }

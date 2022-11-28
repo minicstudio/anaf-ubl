@@ -2,12 +2,10 @@
 
 namespace MinicStudio\UBL\Tests;
 
-use MinicStudio\UBL\Transport\Confirmare;
 use MinicStudio\UBL\Transport\Correction;
 use MinicStudio\UBL\Transport\Notificare;
 use MinicStudio\UBL\Transport\Partner;
 use MinicStudio\UBL\Transport\Date;
-use MinicStudio\UBL\Transport\Delete;
 use MinicStudio\UBL\Transport\LoadingDock;
 use MinicStudio\UBL\Transport\OperationTypeCode;
 use MinicStudio\UBL\Transport\Transport;
@@ -59,6 +57,7 @@ class TransportTest extends TestCase
         $documents = [(new TransportDocument)];
 
         $notificare = (new Notificare)
+            ->setCodeDeclarant('1234567')
             ->setPartner($partner)
             ->setCorrection($correction)
             ->setDate($date)
@@ -68,19 +67,8 @@ class TransportTest extends TestCase
             ->setItems($items)
             ->setDocuments($documents);
 
-        $confirmation = (new Confirmare)
-            ->setUit('3V0P0L0P0T3JUW46')
-            ->setConfirmationType('10');
-
-        $delete = (new Delete)
-            ->setUit('3V0P0L0P0T3JUW46');
-
         $transport = (new Transport())
-            ->setCodeDeclarant('159')
-            ->setReferenceDeclarant('159')
-            ->setNotificare($notificare)
-            ->setConfirmation($confirmation)
-            ->setDelete($delete);
+            ->setNotificare($notificare);
 
         // Test created object
         // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
@@ -92,7 +80,7 @@ class TransportTest extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/TransportTest.xml');
+        $dom->save('./tests/NotificationTest.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
 

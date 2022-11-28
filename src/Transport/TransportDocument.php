@@ -5,7 +5,7 @@ namespace MinicStudio\UBL\Transport;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-class TransportItem implements XmlSerializable
+class TransportDocument implements XmlSerializable
 {
     private $codTipOperatiune;
 
@@ -29,15 +29,8 @@ class TransportItem implements XmlSerializable
     public function xmlSerialize(Writer $writer): void
     {
         $writer->writeAttributes([
-            'nrCrt' => '1',
-            'codTarifar' => '0202',
-            'denumireMarfa' => 'denumireMarfa1',
-            'codScopOperatiune' => '300101',
-            'cantitate' => '50.5',
-            'codUnitateMasura' => '10',
-            'greutateNeta' => '50.5',
-            'greutateBruta' => '50.5',
-            'valoareLeiFaraTva' => '50',
+            'tipDocument' => '10',
+            'dataDocument' => '2022-11-11',
         ]);
     }
 }
