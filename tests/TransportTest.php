@@ -67,7 +67,7 @@ class TransportTest extends TestCase
             ->setNotificare($notificare);
 
         // Test created object
-        // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
+        // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
         $outputXMLString = $generator->transport($transport);
 
@@ -76,7 +76,7 @@ class TransportTest extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/NotificareTest.xml');
+        $dom->save('./tests/generated_files/NotificareTest.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
@@ -93,7 +93,7 @@ class TransportTest extends TestCase
             ->setConfirmation($confirmation);
 
         // Test created object
-        // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
+        // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
         $outputXMLString = $generator->transport($transport);
 
@@ -102,7 +102,7 @@ class TransportTest extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/ConfirmareTest.xml');
+        $dom->save('./tests/generated_files/ConfirmareTest.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
@@ -118,7 +118,7 @@ class TransportTest extends TestCase
             ->setDelete($delete);
 
         // Test created object
-        // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
+        // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
         $outputXMLString = $generator->transport($transport);
 
@@ -127,7 +127,7 @@ class TransportTest extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/ConfirmareTest.xml');
+        $dom->save('./tests/generated_files/ConfirmareTest.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
@@ -179,7 +179,7 @@ class TransportTest extends TestCase
             ->setNotificare($notificare);
 
         // Test created object
-        // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
+        // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
         $outputXMLString = $generator->transport($transport);
 
@@ -188,7 +188,7 @@ class TransportTest extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/Corectie1807Test.xml');
+        $dom->save('./tests/generated_files/Corectie1807Test.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
@@ -237,7 +237,7 @@ class TransportTest extends TestCase
             ->setNotificare($notificare);
 
         // Test created object
-        // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
+        // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
         $outputXMLString = $generator->transport($transport);
 
@@ -246,7 +246,7 @@ class TransportTest extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/Corectie2530Test.xml');
+        $dom->save('./tests/generated_files/Corectie2530Test.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }

@@ -2,6 +2,7 @@
 
 namespace MinicStudio\UBL\Invoice;
 
+use MinicStudio\UBL\Generator;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
