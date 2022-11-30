@@ -9,10 +9,12 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 class Date implements XmlSerializable
 {
     private $car_number;
-    private $country_code;
-    private $code;
-    private $name;
-    private $date;
+    private $trailer_number_1;
+    private $trailer_number_2;
+    private $transport_country_code;
+    private $transport_code;
+    private $transport_name;
+    private $transport_date;
     
     /**
      * Set the car number
@@ -27,49 +29,73 @@ class Date implements XmlSerializable
     }
 
     /**
-     * Set the country code
-     * @param string $country_code
+     * Set the trailer number one
+     * @param string $trailer_number_1
      * @return self
      */
-    public function setCountryCode(string $country_code): self
+    public function setTrailerNumberOne(string $trailer_number_1): self
     {
-        $this->country_code = $country_code;
+        $this->trailer_number_1 = $trailer_number_1;
 
         return $this;
     }
 
     /**
-     * Set code
-     * @param string $code
+     * Set the trailer number one
+     * @param string $trailer_number_2
      * @return self
      */
-    public function setCode(string $code): self
+    public function setTrailerNumberTwo(string $trailer_number_2): self
     {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * Set the name
-     * @param string $name
-     * @return self
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+        $this->trailer_number_2 = $trailer_number_2;
 
         return $this;
     }
 
     /**
      * Set the country code
-     * @param string $date
+     * @param string $transport_country_code
      * @return self
      */
-    public function setdate(string $date): self
+    public function setTransportCountryCode(string $transport_country_code): self
     {
-        $this->date = $date;
+        $this->transport_country_code = $transport_country_code;
+
+        return $this;
+    }
+
+    /**
+     * Set transport code
+     * @param string $transport_code
+     * @return self
+     */
+    public function setTransportCode(string $transport_code): self
+    {
+        $this->transport_code = $transport_code;
+
+        return $this;
+    }
+
+    /**
+     * Set the transport name
+     * @param string $transport_name
+     * @return self
+     */
+    public function setTransportName(string $transport_name): self
+    {
+        $this->transport_name = $transport_name;
+
+        return $this;
+    }
+
+    /**
+     * Set the transport date
+     * @param string $transport_date
+     * @return self
+     */
+    public function setTransportDate(string $transport_date): self
+    {
+        $this->transport_date = $transport_date;
 
         return $this;
     }
@@ -77,23 +103,19 @@ class Date implements XmlSerializable
     public function validate()
     {
         if (!$this->car_number) {
-            throw new InvalidArgumentException('Car number is not provided!');
+            throw new InvalidArgumentException('Car number is required!');
         }
 
-        if (!$this->country_code) {
-            throw new InvalidArgumentException('Country code is not provided!');
+        if (!$this->transport_country_code) {
+            throw new InvalidArgumentException('Country code is required!');
         }
 
-        if (!$this->code) {
-            throw new InvalidArgumentException('Organization identifier is not provided!');
+        if (!$this->transport_name) {
+            throw new InvalidArgumentException('Name is required!');
         }
 
-        if (!$this->name) {
-            throw new InvalidArgumentException('Name is not provided!');
-        }
-
-        if (!$this->date) {
-            throw new InvalidArgumentException('Date is not provided!');
+        if (!$this->transport_date) {
+            throw new InvalidArgumentException('Date is required!');
         }
     }
 
@@ -107,19 +129,13 @@ class Date implements XmlSerializable
         $this->validate();
 
         $writer->writeAttributes([
-            // 'carNumber' => $this->car_number,
-            // 'codTara' => $this->country_code,
-            // 'cod' => $this->code,
-            // 'denumire' => $this->name,
-            // 'date' => $this->date,
-
-        
-            'nrVehicul' => "B111ABC",
-            'codTaraTransportator' => "RO",
-            'codTransportator' => "38575952",
-            'denumireTransportator' => "SME MITANI TRANSPORT",
-            'dataTransport' => "2006-05-04",
-            'codBirouVamal' => "12801",
+            'nrVehicul' => $this->car_number,
+            'nrRemorca1' => $this->trailer_number_1,
+            'nrRemorca2' => $this->trailer_number_2,
+            'codTaraTransportator' => $this->transport_country_code,
+            'codTransportator' => $this->transport_code,
+            'denumireTransportator' => $this->transport_name,
+            'dataTransport' => $this->transport_date,
         ]);
     }
 }

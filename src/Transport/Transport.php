@@ -5,7 +5,6 @@ namespace MinicStudio\UBL\Transport;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-use DateTime;
 use InvalidArgumentException;
 
 class Transport implements XmlSerializable
@@ -79,11 +78,11 @@ class Transport implements XmlSerializable
     public function validate()
     {
         if (!$this->codDeclarant) {
-            throw new InvalidArgumentException('Declarant code is missing!');
+            throw new InvalidArgumentException('Declarant code required!');
         }
 
         if (!$this->refDeclarant) {
-            throw new InvalidArgumentException('Declarant reference is missing!');
+            throw new InvalidArgumentException('Declarant reference is required!');
         }
     }
 

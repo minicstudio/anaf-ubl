@@ -8,10 +8,9 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 class Notificare implements XmlSerializable
 {
-    private $codTipOperatiune;
-    private $correction;
     private $operation_type_code_attribute;
     private $operation_type_code_element;
+    private $correction;
     private $items = [];
     private $partner;
     private $date;
@@ -159,11 +158,11 @@ class Notificare implements XmlSerializable
         }
 
         if (!$this->partner) {
-            throw new InvalidArgumentException('Partner is not provided!');
+            throw new InvalidArgumentException('Partner is required!');
         }
 
         if (!$this->date) {
-            throw new InvalidArgumentException('Date is not provided!');
+            throw new InvalidArgumentException('Date is required!');
         }
 
         if (!$this->loading_dock) {

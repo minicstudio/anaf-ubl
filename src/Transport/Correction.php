@@ -25,7 +25,7 @@ class Correction implements XmlSerializable
     public function validate()
     {
         if (!$this->uit) {
-            throw new InvalidArgumentException('Uit is not provided!');
+            throw new InvalidArgumentException('Uit is required!');
         }
     }
 
@@ -38,7 +38,7 @@ class Correction implements XmlSerializable
     {
         $this->validate();
 
-        $writer->writeAttributes ([
+        $writer->writeAttributes([
             'uit' => $this->uit,
         ]);
     }

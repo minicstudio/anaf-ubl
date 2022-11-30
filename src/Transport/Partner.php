@@ -51,15 +51,15 @@ class Partner implements XmlSerializable
     public function validate()
     {
         if (!$this->country_code) {
-            throw new InvalidArgumentException('Country code is not provided!');
+            throw new InvalidArgumentException('Country code is required!');
         }
 
         if (!$this->code) {
-            throw new InvalidArgumentException('Organization identifier is not provided!');
+            throw new InvalidArgumentException('Organization identifier is required!');
         }
 
         if (!$this->name) {
-            throw new InvalidArgumentException('Name is not provided!');
+            throw new InvalidArgumentException('Name is required!');
         }
     }
 

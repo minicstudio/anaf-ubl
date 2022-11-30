@@ -10,18 +10,7 @@ class Confirmare implements XmlSerializable
 {
     private $uit;
     private $confirmation_type;
-
-    /**
-     * Set the declarant code
-     * @param string $codDeclarant
-     * @return self
-     */
-    public function setCodeDeclarant(string $codDeclarant): self
-    {
-        $this->codDeclarant = $codDeclarant;
-
-        return $this;
-    }
+    private $remarks;
     
     /**
      * Set the uit
@@ -46,15 +35,27 @@ class Confirmare implements XmlSerializable
 
         return $this;
     }
+    
+    /**
+     * Set remarks
+     * @param string $remarks
+     * @return self
+     */
+    public function setRemarks(string $remarks): self
+    {
+        $this->remarks = $remarks;
+
+        return $this;
+    }
 
     public function validate()
     {
         if (!$this->uit) {
-            throw new InvalidArgumentException('Uit is not provided!');
+            throw new InvalidArgumentException('Uit is required!');
         }
 
         if (!$this->confirmation_type) {
-            throw new InvalidArgumentException('Confirmation type is not provided!');
+            throw new InvalidArgumentException('Confirmation type is required!');
         }
     }
 
@@ -70,6 +71,7 @@ class Confirmare implements XmlSerializable
         $writer->writeAttributes([
             'uit' => $this->uit,
             'tipConfirmare' => $this->confirmation_type,
+            'observatii' => $this->remarks,
         ]);
     }
 }

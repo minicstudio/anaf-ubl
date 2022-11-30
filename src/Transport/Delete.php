@@ -25,7 +25,7 @@ class Delete implements XmlSerializable
     public function validate()
     {
         if (!$this->uit) {
-            throw new InvalidArgumentException('Uit is not provided!');
+            throw new InvalidArgumentException('Uit is required!');
         }
     }
 
@@ -38,8 +38,8 @@ class Delete implements XmlSerializable
     {
         $this->validate();
 
-        $writer->writeAttributes ([
-            'uit' => '3V0P0L0P0T3JUW46',
+        $writer->writeAttributes([
+            'uit' => $this->uit,
         ]);
     }
 }
