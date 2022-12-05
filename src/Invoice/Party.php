@@ -7,12 +7,53 @@ use Sabre\Xml\XmlSerializable;
 
 class Party implements XmlSerializable
 {
+    /**
+     * Name
+     *
+     * @var string
+     */
     private $name;
+
+    /**
+     * Party identification id
+     *
+     * @var string
+     */
     private $partyIdentificationId;
+
+    /**
+     * Postal address
+     *
+     * @var Address
+     */
     private $postalAddress;
+
+    /**
+     * Physical location
+     *
+     * @var Address
+     */
     private $physicalLocation;
+
+    /**
+     * Contact
+     *
+     * @var Contact
+     */
     private $contact;
+
+    /**
+     * Party tax scheme
+     *
+     * @var PartyTaxScheme
+     */
     private $partyTaxScheme;
+
+    /**
+     * Legal entity
+     *
+     * @var LegalEntity
+     */
     private $legalEntity;
 
     /**

@@ -7,8 +7,25 @@ use Sabre\Xml\XmlSerializable;
 
 class PayeeFinancialAccount implements XmlSerializable
 {
+    /**
+     * Id
+     *
+     * @var string
+     */
     private $id;
+
+    /**
+     * Name
+     *
+     * @var string
+     */
     private $name;
+
+    /**
+     * Financial institution branch
+     *
+     * @var FinancialInstitutionBranch
+     */
     private $financialInstitutionBranch;
 
 

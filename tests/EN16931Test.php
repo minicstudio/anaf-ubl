@@ -1,6 +1,6 @@
 <?php
 
-namespace NumNum\UBL\Tests;
+namespace MinicStudio\UBL\Tests;
 
 use PHPUnit\Framework\TestCase;
 
@@ -169,8 +169,8 @@ class EN16931Test extends TestCase
             ->setTaxTotal($taxTotal);
 
         // Test created object
-        // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
-        $generator = new \MinicStudio\UBL\Invoice\Generator();
+        // Use \MinicStudio\UBL\Generator to generate an XML string
+        $generator = new \MinicStudio\UBL\Generator();
         $outputXMLString = $generator->invoice($invoice);
 
         // Create PHP Native DomDocument object, that can be
@@ -178,7 +178,7 @@ class EN16931Test extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/EN16931Test.xml');
+        $dom->save('./tests/generated_files/EN16931Test.xml');
 
         // $this->assertEquals(true, $dom->schemaValidate($this->schema));
 

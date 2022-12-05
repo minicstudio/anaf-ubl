@@ -7,7 +7,18 @@ use Sabre\Xml\XmlSerializable;
 
 class OrderReference implements XmlSerializable
 {
+    /**
+     * Id
+     *
+     * @var string
+     */
     private $id;
+
+    /**
+     * Sales order id
+     *
+     * @var string
+     */
     private $salesOrderId;
 
     /**

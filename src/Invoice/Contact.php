@@ -7,9 +7,32 @@ use Sabre\Xml\XmlSerializable;
 
 class Contact implements XmlSerializable
 {
+    /**
+     * Name
+     *
+     * @var string
+     */
     private $name;
+
+    /**
+     * Phone number
+     *
+     * @var string
+     */
     private $telephone;
+
+    /**
+     * Fax number
+     *
+     * @var string
+     */
     private $telefax;
+
+    /**
+     * Email address
+     *
+     * @var string
+     */
     private $electronicMail;
 
     /**

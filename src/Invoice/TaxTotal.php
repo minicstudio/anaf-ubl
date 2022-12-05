@@ -2,6 +2,7 @@
 
 namespace MinicStudio\UBL\Invoice;
 
+use MinicStudio\UBL\Generator;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -9,7 +10,18 @@ use InvalidArgumentException;
 
 class TaxTotal implements XmlSerializable
 {
+    /**
+     * Tax amount
+     *
+     * @var float
+     */
     private $taxAmount;
+
+    /**
+     * Tax subtotals
+     *
+     * @var array
+     */
     private $taxSubTotals = [];
 
     /**

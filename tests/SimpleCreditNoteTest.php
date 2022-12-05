@@ -1,6 +1,6 @@
 <?php
 
-namespace NumNum\UBL\Tests;
+namespace MinicStudio\UBL\Tests;
 
 use PHPUnit\Framework\TestCase;
 
@@ -101,8 +101,8 @@ class SimpleCreditNoteTest extends TestCase
             ->setInvoiceTypeCode(\MinicStudio\UBL\Invoice\InvoiceTypeCode::CREDIT_NOTE);
 
         // Test created object
-        // Use \MinicStudio\UBL\Invoice\Generator to generate an XML string
-        $generator = new \MinicStudio\UBL\Invoice\Generator();
+        // Use \MinicStudio\UBL\Generator to generate an XML string
+        $generator = new \MinicStudio\UBL\Generator();
         $outputXMLString = $generator->invoice($invoice);
 
         // Create PHP Native DomDocument object, that can be
@@ -110,7 +110,7 @@ class SimpleCreditNoteTest extends TestCase
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/SimpleCreditNoteTest.xml');
+        $dom->save('./tests/generated_files/SimpleCreditNoteTest.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }

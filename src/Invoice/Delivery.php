@@ -8,8 +8,25 @@ use DateTime;
 
 class Delivery implements XmlSerializable
 {
+    /**
+     * Actula delivery date
+     *
+     * @var Delivery
+     */
     private $actualDeliveryDate;
+
+    /**
+     * Delivery location
+     *
+     * @var Delivery
+     */
     private $deliveryLocation;
+
+    /**
+     * Delivery party
+     *
+     * @var Delivery
+     */
     private $deliveryParty;
 
     /**

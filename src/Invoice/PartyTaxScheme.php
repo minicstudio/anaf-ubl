@@ -9,8 +9,25 @@ use InvalidArgumentException;
 
 class PartyTaxScheme implements XmlSerializable
 {
+    /**
+     * Registration name
+     *
+     * @var string
+     */
     private $registrationName;
+
+    /**
+     * Pompany id
+     *
+     * @var string
+     */
     private $companyId;
+
+    /**
+     * Tax scheme
+     *
+     * @var TaxScheme
+     */
     private $taxScheme;
 
     /**

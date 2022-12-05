@@ -1,0 +1,59 @@
+<?php
+
+namespace MinicStudio\UBL;
+
+use MinicStudio\UBL\Invoice\Invoice;
+use MinicStudio\UBL\Transport\Transport;
+use Sabre\Xml\Service;
+
+class Generator
+{
+    /**
+     * Currency id
+     *
+     * @var string
+     */
+    public static $currencyID;
+
+    /**
+     * Generates the invoice xml.
+     *
+     * @param Invoice $invoice
+     * @param $currencyID
+     * @return void
+     */
+    public static function invoice(Invoice $invoice, $currencyId = 'EUR')
+    {
+        self::$currencyID = $currencyId;
+
+        $xmlService = new Service();
+
+        $xmlService->namespaceMap = [
+            'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2' => '',
+            'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2' => 'cbc',
+            'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2' => 'cac'
+        ];
+
+        return $xmlService->write('Invoice', [
+            $invoice
+        ]);
+    }
+    
+    /**
+     * Generates the transport xml.
+     *
+     * @param Transport $transport
+     * @return void
+     */
+    public static function transport(Transport $transport)
+    {
+        $xmlService = new Service();
+
+        $xmlService->namespaceMap = [
+            'mfp:anaf:dgti:eTransport:declaratie:v1' => '',
+            'http://www.w3.org/2001/XMLSchema-instance' => 'xsi',
+        ];
+
+        return $xmlService->write('eTransport', $transport);
+    }
+}

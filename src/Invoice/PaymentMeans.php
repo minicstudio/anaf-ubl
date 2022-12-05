@@ -8,15 +8,56 @@ use DateTime;
 
 class PaymentMeans implements XmlSerializable
 {
+    /**
+     * Payment means code
+     *
+     * @var int
+     */
     private $paymentMeansCode = 1;
+
+    /**
+     * Payment means code attributes
+     *
+     * @var array
+     */
     private $paymentMeansCodeAttributes = [
         'listID' => 'UN/ECE 4461',
         'listName' => 'Payment Means',
         'listURI' => 'http://docs.oasis-open.org/ubl/os-UBL-2.0-update/cl/gc/default/PaymentMeansCode-2.0.gc'];
+
+    /**
+     * Payment due date
+     *
+     * @var DateTime
+     */
     private $paymentDueDate;
+
+    /**
+     * Instruction id
+     *
+     * @var string
+     */
     private $instructionId;
+
+    /**
+     * Instruction note
+     *
+     * @var string
+     */
     private $instructionNote;
+
+    /**
+     * Payment id
+     *
+     * @var string
+     */
     private $paymentId;
+
+    /**
+     * Payee financial account
+     *
+     * @var PayeeFinancialAccount
+     */
     private $payeeFinancialAccount;
 
     /**

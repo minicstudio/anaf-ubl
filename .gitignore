@@ -74,7 +74,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Generated XML files from tests
-/tests/*.xml
+/tests/generated_files/*.xml
 
 # Test cache
 .phpunit.result.cache

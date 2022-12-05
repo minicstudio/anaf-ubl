@@ -7,10 +7,39 @@ use Sabre\Xml\XmlSerializable;
 
 class Item implements XmlSerializable
 {
+    /**
+     * Description
+     *
+     * @var string
+     */
     private $description;
+
+    /**
+     * Name
+     *
+     * @var string
+     */
     private $name;
+
+    /**
+     * Buyers item identification
+     *
+     * @var string
+     */
     private $buyersItemIdentification;
+
+    /**
+     * Sellers itemIdentification
+     *
+     * @var string
+     */
     private $sellersItemIdentification;
+
+    /**
+     * Classified tax category
+     *
+     * @var ClassifiedTaxCategory
+     */
     private $classifiedTaxCategory;
 
     /**

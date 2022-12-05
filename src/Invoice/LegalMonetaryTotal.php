@@ -2,15 +2,45 @@
 
 namespace MinicStudio\UBL\Invoice;
 
+use MinicStudio\UBL\Generator;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
 class LegalMonetaryTotal implements XmlSerializable
 {
+    /**
+     * Line extension amount
+     *
+     * @var float
+     */
     private $lineExtensionAmount = 0;
+
+    /**
+     * Tax exclusive amount
+     *
+     * @var float
+     */
     private $taxExclusiveAmount = 0;
+
+    /**
+     * Tax inclusive amount
+     *
+     * @var float
+     */
     private $taxInclusiveAmount = 0;
+
+    /**
+     * Allowance total amount
+     *
+     * @var float
+     */
     private $allowanceTotalAmount = 0;
+
+    /**
+     * Payable amount
+     *
+     * @var float
+     */
     private $payableAmount = 0;
 
     /**

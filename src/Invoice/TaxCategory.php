@@ -9,15 +9,56 @@ use InvalidArgumentException;
 
 class TaxCategory implements XmlSerializable
 {
+    /**
+     * Id
+     *
+     * @var string
+     */
     private $id;
+
+    /**
+     * Id attributes
+     *
+     * @var array
+     */
     private $idAttributes = [
         'schemeID' => TaxCategory::UNCL5305,
         'schemeName' => 'Duty or tax or fee category'
     ];
+
+    /**
+     * Name
+     *
+     * @var string
+     */
     private $name;
+
+    /**
+     * Percent
+     *
+     * @var float
+     */
     private $percent;
+
+    /**
+     * Tax scheme
+     *
+     * @var TaxScheme
+     */
     private $taxScheme;
+
+    /**
+     * Tax exemption reason
+     *
+     * @var string
+     */
     private $taxExemptionReason;
+
+    /**
+     * Tax exemption reason code
+     *
+     * @var string
+     */
     private $taxExemptionReasonCode;
 
     public const UNCL5305 = 'UNCL5305';
