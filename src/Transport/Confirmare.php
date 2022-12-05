@@ -8,8 +8,25 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 class Confirmare implements XmlSerializable
 {
+    /**
+     * Uit
+     *
+     * @var string
+     */
     private $uit;
+
+    /**
+     * Confirmation type
+     *
+     * @var string
+     */
     private $confirmation_type;
+
+    /**
+     * Remarks
+     *
+     * @var string
+     */
     private $remarks;
     
     /**
@@ -48,6 +65,12 @@ class Confirmare implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!$this->uit) {

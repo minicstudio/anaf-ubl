@@ -10,31 +10,186 @@ use InvalidArgumentException;
 
 class Invoice implements XmlSerializable
 {
+    /**
+     * UBL version id
+     *
+     * @var string
+     */
     private $UBLVersionID = '2.1';
+
+    /**
+     * Customization id
+     *
+     * @var string
+     */
     private $customizationID = '1.0';
+
+    /**
+     * Id
+     *
+     * @var string
+     */
     private $id;
+
+    /**
+     * Copy indicator
+     *
+     * @var bool
+     */
     private $copyIndicator;
+
+    /**
+     * Issue date
+     *
+     * @var DateTime
+     */
     private $issueDate;
+
+    /**
+     * Invoice type code
+     *
+     * @var string
+     */
     private $invoiceTypeCode = InvoiceTypeCode::INVOICE;
+
+    /**
+     * Note
+     *
+     * @var string
+     */
     private $note;
+
+    /**
+     * Tax point date
+     *
+     * @var DateTime
+     */
     private $taxPointDate;
+
+    /**
+     * Due date
+     *
+     * @var DateTime
+     */
     private $dueDate;
+
+    /**
+     * Payment terms
+     *
+     * @var PaymentTerms
+     */
     private $paymentTerms;
+
+    /**
+     * Accounting supplier party
+     *
+     * @var Party
+     */
     private $accountingSupplierParty;
+
+    /**
+     * Copy indicator
+     *
+     * @var Party
+     */
     private $accountingCustomerParty;
+
+    /**
+     * Supplier assigned account id
+     *
+     * @var string
+     */
     private $supplierAssignedAccountID;
+
+    /**
+     * Payment means
+     *
+     * @var PaymentMeans
+     */
     private $paymentMeans;
+
+    /**
+     * Tax total
+     *
+     * @var TaxTotal
+     */
     private $taxTotal;
+
+    /**
+     * Legal monetary total
+     *
+     * @var LegalMonetaryTotal
+     */
     private $legalMonetaryTotal;
+
+    /**
+     * Invoice lines
+     *
+     * @var array
+     */
     private $invoiceLines;
+
+    /**
+     * Allowance charge
+     *
+     * @var array
+     */
     private $allowanceCharges;
+
+    /**
+     * Additional document reference
+     *
+     * @var AdditionalDocumentReference
+     */
     private $additionalDocumentReference;
+
+    /**
+     * Document currency code
+     *
+     * @var Invoice
+     */
     private $documentCurrencyCode = 'EUR';
+
+    /**
+     * Buyer refenrence
+     *
+     * @var string
+     */
     private $buyerReference;
+
+    /**
+     * Accounting cost code
+     *
+     * @var string
+     */
     private $accountingCostCode;
+
+    /**
+     * Invoice period
+     *
+     * @var InvoicePeriod
+     */
     private $invoicePeriod;
+
+    /**
+     * Delivery
+     *
+     * @var Delivery
+     */
     private $delivery;
+
+    /**
+     * Order reference
+     *
+     * @var OrderReference
+     */
     private $orderReference;
+
+    /**
+     * Contract document reference
+     *
+     * @var ContractDocumentReference
+     */
     private $contractDocumentReference;
 
     /**

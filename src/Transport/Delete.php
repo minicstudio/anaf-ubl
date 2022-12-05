@@ -8,6 +8,11 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 class Delete implements XmlSerializable
 {
+    /**
+     * Uit
+     *
+     * @var string
+     */
     private $uit;
     
     /**
@@ -22,6 +27,12 @@ class Delete implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!$this->uit) {

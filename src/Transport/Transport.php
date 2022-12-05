@@ -9,10 +9,39 @@ use InvalidArgumentException;
 
 class Transport implements XmlSerializable
 {
+    /**
+     * Declarant code
+     *
+     * @var string
+     */
     private $codDeclarant;
+
+    /**
+     * Declarant reference
+     *
+     * @var string
+     */
     private $refDeclarant;
+
+    /**
+     * Notification
+     *
+     * @var string
+     */
     private $notificare;
+
+    /**
+     * Confiramtion
+     *
+     * @var string
+     */
     private $confirmation;
+
+    /**
+     * Delete
+     *
+     * @var string
+     */
     private $delete;
 
     /**
@@ -75,6 +104,12 @@ class Transport implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!$this->codDeclarant) {

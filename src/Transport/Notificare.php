@@ -8,14 +8,67 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 class Notificare implements XmlSerializable
 {
+    /**
+     * Operation type code attribute
+     *
+     * @var string
+     */
     private $operation_type_code_attribute;
+
+    /**
+     * Operation type code element
+     *
+     * @var string
+     */
     private $operation_type_code_element;
+
+    /**
+     * Correction
+     *
+     * @var Correction
+     */
     private $correction;
+
+    /**
+     * Transport items
+     *
+     * @var TransportItem
+     */
     private $items = [];
+
+    /**
+     * Partner
+     *
+     * @var Partner
+     */
     private $partner;
+
+    /**
+     * Date
+     *
+     * @var Date
+     */
     private $date;
+
+    /**
+     * Loading dock
+     *
+     * @var LoadingDock
+     */
     private $loading_dock;
+
+    /**
+     * Unloading dock
+     *
+     * @var UnLoadingDock
+     */
     private $un_loading_dock;
+
+    /**
+     * Transport documents
+     *
+     * @var TransportDocument
+     */
     private $documents = [];
     
     /**
@@ -151,6 +204,12 @@ class Notificare implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!count($this->items)) {

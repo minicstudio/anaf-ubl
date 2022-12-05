@@ -8,12 +8,53 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 class Date implements XmlSerializable
 {
+    /**
+     * Car number
+     *
+     * @var string
+     */
     private $car_number;
+
+    /**
+     * Trailer one  
+     *
+     * @var string
+     */
     private $trailer_number_1;
+
+    /**
+     * Trailer two
+     *
+     * @var string
+     */
     private $trailer_number_2;
+
+    /**
+     * Transport country code
+     *
+     * @var string
+     */
     private $transport_country_code;
+
+    /**
+     * Transport code
+     *
+     * @var string
+     */
     private $transport_code;
+
+    /**
+     * Transport name
+     *
+     * @var string
+     */
     private $transport_name;
+
+    /**
+     * Transport date
+     *
+     * @var string
+     */
     private $transport_date;
     
     /**
@@ -100,6 +141,12 @@ class Date implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!$this->car_number) {

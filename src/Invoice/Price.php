@@ -8,8 +8,25 @@ use Sabre\Xml\XmlSerializable;
 
 class Price implements XmlSerializable
 {
+    /**
+     * Price amount
+     *
+     * @var float
+     */
     private $priceAmount;
+
+    /**
+     * Base quantity
+     *
+     * @var float
+     */
     private $baseQuantity;
+
+    /**
+     * Unit code
+     *
+     * @var string
+     */
     private $unitCode = UnitCode::UNIT;
 
     /**

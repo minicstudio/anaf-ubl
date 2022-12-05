@@ -8,8 +8,25 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 class Partner implements XmlSerializable
 {
+    /**
+     * Country code
+     *
+     * @var string
+     */
     private $country_code;
+
+    /**
+     * Partner code
+     *
+     * @var string
+     */
     private $code;
+
+    /**
+     * Partner name
+     *
+     * @var string
+     */
     private $name;
     
     /**
@@ -48,6 +65,12 @@ class Partner implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!$this->country_code) {

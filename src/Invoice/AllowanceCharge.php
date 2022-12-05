@@ -8,13 +8,60 @@ use Sabre\Xml\XmlSerializable;
 
 class AllowanceCharge implements XmlSerializable
 {
+    /**
+     * Charge indicator
+     *
+     * @var bool
+     */
     private $chargeIndicator;
+
+    /**
+     * Allowance charge resason code
+     *
+     * @var int
+     */
     private $allowanceChargeReasonCode;
+
+    /**
+     * Allowance charge resason
+     *
+     * @var string
+     */
     private $allowanceChargeReason;
+
+    /**
+     * Multiplier factor numeric
+     *
+     * @var int
+     */
     private $multiplierFactorNumeric;
+
+    /**
+     * Base amount
+     *
+     * @var float
+     */
     private $baseAmount;
+
+    /**
+     * Amount
+     *
+     * @var float
+     */
     private $amount;
+
+    /**
+     * Total tax
+     *
+     * @var TaxCategory
+     */
     private $taxTotal;
+
+    /**
+     * Tax category
+     *
+     * @var TaxTotal
+     */
     private $taxCategory;
 
     /**

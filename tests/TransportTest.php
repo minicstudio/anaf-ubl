@@ -24,16 +24,18 @@ class TransportTest extends TestCase
 
     /**
      * Test the notification
-     * @param MinicStudio\UBL\Transport\Notificare
+     * @param \MinicStudio\UBL\Transport\Notificare
      * @return void
      */
     public function testNotificareXML()
     {
+        // Transport partner
         $partner = (new Partner)
             ->setCountryCode('RO')
             ->setCode('1234567')
             ->setName('Minic Studio');
 
+        // Transport date
         $date = (new Date)
             ->setCarNumber('B111ABC')
             ->setTrailerNumberOne('B111ABC')
@@ -43,6 +45,7 @@ class TransportTest extends TestCase
             ->setTransportName('Minic Studio')
             ->setTransportDate('2022-11-11');
 
+        // Transport loading dock
         $loading_dock = (new LoadingDock)
             ->setCountyCode('1')
             ->setCity('Odorheiu Scuiesc')
@@ -55,6 +58,7 @@ class TransportTest extends TestCase
             ->setInformation('nothing')
             ->setPostCode('456789');
 
+        // Transport unloading dock
         $un_loading_dock = (new UnLoadingDock)
             ->setCountyCode('1')
             ->setCity('Odorheiu Scuiesc')
@@ -67,6 +71,7 @@ class TransportTest extends TestCase
             ->setInformation('nothing')
             ->setPostCode('456789');
 
+        // Transport product
         $items = [(new TransportItem)
             ->setCrtNumber('2')
             ->setTariffCode('2020')
@@ -79,6 +84,7 @@ class TransportTest extends TestCase
             ->setPriceWithoutVat('50')
         ];
 
+        // Transport document
         $documents = [(new TransportDocument)
             ->setCodTipOperatiune('10')
             ->setDocumentNumber('2')
@@ -86,6 +92,7 @@ class TransportTest extends TestCase
             ->setDocumentInformation('nothing')
         ];
 
+        // Transport notification
         $notificare = (new Notificare)
             ->setOperationTypeCodeAsAttribute('30')
             ->setPartner($partner)
@@ -95,6 +102,7 @@ class TransportTest extends TestCase
             ->setItems($items)
             ->setDocuments($documents);
 
+        // Transport
         $transport = (new Transport())
             ->setCodDeclarant('159')
             ->setReferenceDeclarant('159')
@@ -117,16 +125,18 @@ class TransportTest extends TestCase
 
     /**
      * Test the confirmation
-     * @param MinicStudio\UBL\Transport\Confirmare
+     * @param \MinicStudio\UBL\Transport\Confirmare
      * @return void
      */
     public function testConfirmareXML()
     {
+        // Transport confirmation
         $confirmation = (new Confirmare)
             ->setUit('3V0P0L0P0T3JUW46')
             ->setConfirmationType('10')
             ->setRemarks('information');
 
+        // Transport
         $transport = (new Transport())
             ->setCodDeclarant('159')
             ->setReferenceDeclarant('159')
@@ -149,14 +159,16 @@ class TransportTest extends TestCase
 
     /**
      * Test delete
-     * @param MinicStudio\UBL\Transport\Delete
+     * @param \MinicStudio\UBL\Transport\Delete
      * @return void
      */
     public function testStergereXML()
     {
+        // Transport delete
         $delete = (new Delete)
             ->setUit('3V0P0L0P0T3JUW46');
 
+        // Transport
         $transport = (new Transport())
             ->setCodDeclarant('159')
             ->setReferenceDeclarant('159')
@@ -179,16 +191,18 @@ class TransportTest extends TestCase
 
     /**
      * Test the correction
-     * @param MinicStudio\UBL\Transport\Correction
+     * @param \MinicStudio\UBL\Transport\Correction
      * @return void
      */
     public function testCorrectie1807XML()
     {
+        // Transport partner corretion
         $partner = (new Partner)
             ->setCountryCode('RO')
             ->setCode('1234567')
             ->setName('Minic Studio');
 
+        // Transport date corretion
         $date = (new Date)
             ->setCarNumber('B111ABC')
             ->setTrailerNumberOne('B111ABC')
@@ -198,6 +212,7 @@ class TransportTest extends TestCase
             ->setTransportName('Minic Studio')
             ->setTransportDate('2022-11-11');
 
+        // Transport loading dock corretion
         $loading_dock = (new LoadingDock)
             ->setCountyCode('1')
             ->setCity('Bucuresti')
@@ -210,6 +225,7 @@ class TransportTest extends TestCase
             ->setInformation('nothing')
             ->setPostCode('456789');
 
+        // Transport unloading dock corretion
         $un_loading_dock = (new UnLoadingDock)
             ->setCountyCode('1')
             ->setCity('Bucuresti')
@@ -222,6 +238,7 @@ class TransportTest extends TestCase
             ->setInformation('nothing')
             ->setPostCode('456789');
 
+        // Transport product corretion
         $items = [(new TransportItem)
             ->setCrtNumber('2')
             ->setTariffCode('2020')
@@ -234,6 +251,7 @@ class TransportTest extends TestCase
             ->setPriceWithoutVat('50')
         ];
 
+        // Transport document corretion
         $documents = [(new TransportDocument)
             ->setCodTipOperatiune('10')
             ->setDocumentNumber('2')
@@ -241,9 +259,11 @@ class TransportTest extends TestCase
             ->setDocumentInformation('nothing')
         ];
 
+        // Transport corretion
         $correction = (new Correction)
             ->setUit('4C0U0C0J0W3DDQ92');
 
+        // Transport notification corretion
         $notificare = (new Notificare)
             ->setOperationTypeCodeAsAttribute('30')
             ->setPartner($partner)
@@ -254,6 +274,7 @@ class TransportTest extends TestCase
             ->setDocuments($documents)
             ->setCorrection($correction);
 
+        // Transport corretion
         $transport = (new Transport())
             ->setCodDeclarant('159')
             ->setReferenceDeclarant('referinta declarant')

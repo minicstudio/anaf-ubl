@@ -8,9 +8,32 @@ use Sabre\Xml\XmlSerializable;
 
 class TransportDocument implements XmlSerializable
 {
+    /**
+     * Operation type code
+     *
+     * @var string
+     */
     private $cod_tip_operatiune;
+
+    /**
+     * Document number
+     *
+     * @var string
+     */
     private $document_number;
+
+    /**
+     * Document date
+     *
+     * @var string
+     */
     private $document_date;
+
+    /**
+     * Document information
+     *
+     * @var string
+     */
     private $document_information;
 
     /**
@@ -61,6 +84,12 @@ class TransportDocument implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!$this->cod_tip_operatiune) {

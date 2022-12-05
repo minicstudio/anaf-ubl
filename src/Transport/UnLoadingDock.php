@@ -8,15 +8,74 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 class UnLoadingDock implements XmlSerializable
 {
+    /**
+     * Country code
+     *
+     * @var string
+     */
     private $county_code;
+
+    /**
+     * City name
+     *
+     * @var string
+     */
     private $city;
+
+    /**
+     * Street name
+     *
+     * @var string
+     */
     private $street;
+
+    /**
+     * Address number
+     *
+     * @var string
+     */
     private $address_number;
+
+    /**
+     * Block number
+     *
+     * @var string
+     */
     private $block_number;
+
+    /**
+     * Stairs number
+     *
+     * @var string
+     */
     private $stairs;
+
+    /**
+     * Floor number
+     *
+     * @var string
+     */
     private $floor;
+
+    /**
+     * Apartment number
+     *
+     * @var string
+     */
     private $apartment_number;
+
+    /**
+     * Information
+     *
+     * @var string
+     */
     private $information;
+
+    /**
+     * Post code
+     *
+     * @var string
+     */
     private $post_code;
     
     /**
@@ -139,6 +198,12 @@ class UnLoadingDock implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!$this->county_code) {

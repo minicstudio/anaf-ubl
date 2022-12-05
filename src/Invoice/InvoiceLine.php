@@ -8,16 +8,81 @@ use Sabre\Xml\XmlSerializable;
 
 class InvoiceLine implements XmlSerializable
 {
+    /**
+     * Id
+     *
+     * @var string
+     */
     private $id;
+
+    /**
+     * Invoiced quantity
+     *
+     * @var float
+     */
     private $invoicedQuantity = 0;
+
+    /**
+     * Line extension amount
+     *
+     * @var float
+     */
     private $lineExtensionAmount = 0;
+
+    /**
+     * Unit code
+     *
+     * @var string
+     */
     private $unitCode = 'MON';
+
+    /**
+     * Total tax
+     *
+     * @var TaxTotal
+     */
     private $taxTotal;
+
+    /**
+     * Invoice period
+     *
+     * @var InvoicePeriod
+     */
     private $invoicePeriod;
+
+    /**
+     * Note
+     *
+     * @var string
+     */
     private $note;
+
+    /**
+     * Item
+     *
+     * @var Item
+     */
     private $item;
+
+    /**
+     * Price
+     *
+     * @var Price
+     */
     private $price;
+
+    /**
+     * Accounting cost code
+     *
+     * @var string
+     */
     private $accountingCostCode;
+
+    /**
+     * Accounting cost
+     *
+     * @var string
+     */
     private $accountingCost;
 
     /**

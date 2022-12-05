@@ -7,12 +7,53 @@ use Sabre\Xml\XmlSerializable;
 
 class Address implements XmlSerializable
 {
+    /**
+     * Street name
+     *
+     * @var string
+     */
     private $streetName;
+
+    /**
+     * Additional street name
+     *
+     * @var string
+     */
     private $additionalStreetName;
+
+    /**
+     * Building number
+     *
+     * @var string
+     */
     private $buildingNumber;
+
+    /**
+     * City name
+     *
+     * @var string
+     */
     private $cityName;
+
+    /**
+     * Postal zone
+     *
+     * @var string
+     */
     private $postalZone;
+
+    /**
+     * Country subentity
+     *
+     * @var string
+     */
     private $countrySubentity;
+
+    /**
+     * Country
+     *
+     * @var Country
+     */
     private $country;
 
     /**

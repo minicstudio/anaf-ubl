@@ -7,9 +7,32 @@ use Sabre\Xml\XmlSerializable;
 
 class PaymentTerms implements XmlSerializable
 {
+    /**
+     * Note
+     *
+     * @var string
+     */
     private $note;
+
+    /**
+     * Settlement discount percent
+     *
+     * @var float
+     */
     private $settlementDiscountPercent;
+
+    /**
+     * Amount
+     *
+     * @var float
+     */
     private $amount;
+
+    /**
+     * Settlement Period
+     *
+     * @var SettlementPeriod
+     */
     private $settlementPeriod;
 
     /**

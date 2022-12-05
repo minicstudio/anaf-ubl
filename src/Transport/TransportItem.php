@@ -8,14 +8,67 @@ use Sabre\Xml\XmlSerializable;
 
 class TransportItem implements XmlSerializable
 {
+    /**
+     * Crt number
+     *
+     * @var string
+     */
     private $crt_number;
+
+    /**
+     * Tariff code
+     *
+     * @var string
+     */
     private $tariff_code;
+
+    /**
+     * Product name
+     *
+     * @var string
+     */
     private $product_name;
+
+    /**
+     * Purpose operation code
+     *
+     * @var string
+     */
     private $purpose_operation_code;
+
+    /**
+     * Quantity
+     *
+     * @var string
+     */
     private $quantity;
+
+    /**
+     * Unit of measure code
+     *
+     * @var string
+     */
     private $unit_of_measure_code;
+
+    /**
+     * Net weight number
+     *
+     * @var string
+     */
     private $net_weight;
+
+    /**
+     * Gross weight number
+     *
+     * @var string
+     */
     private $gross_weight;
+
+    /**
+     * price without vat
+     *
+     * @var string
+     */
     private $price_without_vat;
 
     /**
@@ -126,6 +179,12 @@ class TransportItem implements XmlSerializable
         return $this;
     }
 
+    /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     * @return void
+     */
     public function validate()
     {
         if (!($this->crt_number)) {

@@ -8,8 +8,20 @@ use Sabre\Xml\Service;
 
 class Generator
 {
+    /**
+     * Currency id
+     *
+     * @var string
+     */
     public static $currencyID;
 
+    /**
+     * Generates the invoice xml.
+     *
+     * @param Invoice $invoice
+     * @param $currencyID
+     * @return void
+     */
     public static function invoice(Invoice $invoice, $currencyId = 'EUR')
     {
         self::$currencyID = $currencyId;
@@ -26,20 +38,13 @@ class Generator
             $invoice
         ]);
     }
-
-    // <eTransport xmlns="mfp:anaf:dgti:eTransport:declaratie:v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="mfp:anaf:dgti:eTransport:declaratie:v1 file:/D:/formInteractive/_inLucru/_proiecte/eTransport/final/SchemaSimtic_model_2022_03_15.xsd" codDeclarant="40890617">
-    // <notificare codTipOperatiune="30">
-    // <bunuriTransportate nrCrt="1" codTarifar="0202" denumireMarfa="denumireMarfa1" codScopOperatiune="300101" cantitate="50.5" codUnitateMasura="10" greutateNeta="50.5" greutateBruta="50.5" valoareLeiFaraTva="50"/>
-    // <bunuriTransportate nrCrt="2" codTarifar="02071410" denumireMarfa="denumireMarfa3" codScopOperatiune="300101" cantitate="50.5" codUnitateMasura="10" greutateNeta="50.5" greutateBruta="50.5" valoareLeiFaraTva="50"/>
-    // <partenerComercial codTara="RO" cod="1590082" denumire="denumire1"/>
-    // <dateTransport nrVehicul="B111ABC" codTaraTransportator="RO" codTransportator="38575952" denumireTransportator="SME MITANI TRANSPORT" dataTransport="2006-05-04"/>
-    // <locIncarcare codJudet="1" denumireLocalitate="denumireLocalitate1" denumireStrada="denumireStrada1"/>
-    // <locDescarcare codJudet="40" denumireLocalitate="denumireLocalitate3" denumireStrada="denumireStrada3"/>
-    // <documenteTransport tipDocument="10" dataDocument="2006-05-04"/>
-    // <documenteTransport tipDocument="20" dataDocument="2006-05-04"/>
-    // </notificare>
-    // </eTransport>
     
+    /**
+     * Generates the transport xml.
+     *
+     * @param Transport $transport
+     * @return void
+     */
     public static function transport(Transport $transport)
     {
         $xmlService = new Service();

@@ -10,7 +10,18 @@ use InvalidArgumentException;
 
 class TaxTotal implements XmlSerializable
 {
+    /**
+     * Tax amount
+     *
+     * @var float
+     */
     private $taxAmount;
+
+    /**
+     * Tax subtotals
+     *
+     * @var array
+     */
     private $taxSubTotals = [];
 
     /**

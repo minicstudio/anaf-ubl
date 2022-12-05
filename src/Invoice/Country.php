@@ -7,6 +7,11 @@ use Sabre\Xml\XmlSerializable;
 
 class Country implements XmlSerializable
 {
+    /**
+     * Identification code
+     *
+     * @var string
+     */
     private $identificationCode;
 
     /**

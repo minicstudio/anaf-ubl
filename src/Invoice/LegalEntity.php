@@ -7,9 +7,32 @@ use Sabre\Xml\XmlSerializable;
 
 class LegalEntity implements XmlSerializable
 {
+    /**
+     * Registration name
+     *
+     * @var string
+     */
     private $registrationName;
+
+    /**
+     * Company id
+     *
+     * @var string
+     */
     private $companyId;
+
+    /**
+     * Company id attributes
+     *
+     * @var string
+     */
     private $companyIdAttributes;
+
+    /**
+     * Company legal form
+     *
+     * @var string
+     */
     private $companyLegalForm;
 
     /**
