@@ -134,7 +134,7 @@ class VehicleModification implements XmlSerializable
             throw new InvalidArgumentException('Uit is required!');
         }
 
-        if (!($this->crt_number)) {
+        if (!$this->crt_number) {
             throw new InvalidArgumentException('Crt number is required!');
         }
 

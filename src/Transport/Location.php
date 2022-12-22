@@ -234,58 +234,40 @@ class Location implements XmlSerializable
             'denumireStrada' => $this->street,
         ]);
 
-        if ($this->county_code) {
-            $writer->write([
-                'codJudet' => $this->county_code,
-            ]);
-        }
-
-        if ($this->city) {
-            $writer->write([
-                'denumireLocalitate' => $this->city,
-            ]);
-        }
-
-        if ($this->street) {
-            $writer->write([
-                'denumireStrada' => $this->street,
-            ]);
-        }
-
         if ($this->post_code) {
-            $writer->write([
+            $writer->writeAttributes([
                 'codPostal' => $this->post_code,
             ]);
         }
 
         if ($this->address_number) {
-            $writer->write([
+            $writer->writeAttributes([
                 'numar' => $this->address_number,
             ]);
         }
 
         if ($this->block_number) {
-            $writer->write([
+            $writer->writeAttributes([
                 'bloc' => $this->block_number,
             ]);
         }
         if ($this->stairs) {
-            $writer->write([
+            $writer->writeAttributes([
                 'scara' => $this->stairs,
             ]);
         }
         if ($this->floor) {
-            $writer->write([
+            $writer->writeAttributes([
                 'etaj' => $this->floor,
             ]);
         }
         if ($this->apartment_number) {
-            $writer->write([
+            $writer->writeAttributes([
                 'apartament' => $this->apartment_number,
             ]);
         }
         if ($this->information) {
-            $writer->write([
+            $writer->writeAttributes([
                 'alteInfo' => $this->information,
             ]);
         }

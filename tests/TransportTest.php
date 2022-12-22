@@ -50,8 +50,8 @@ class TransportTest extends TestCase
 
         // Transport location
         $location = (new Location)
-            ->setCountyCode('RO')
-            ->setCity('Odorheiu-Secuiesc')
+            ->setCountyCode('6')
+            ->setCity('Odorhei')
             ->setStreet('Bechlean');
 
         // Transport loading dock
@@ -232,8 +232,8 @@ class TransportTest extends TestCase
 
         // Transport location
         $location = (new Location)
-            ->setCountyCode('RO')
-            ->setCity('Odorheiu-Secuiesc')
+            ->setCountyCode('6')
+            ->setCity('Odorhei')
             ->setStreet('Bechlean');
 
         // Transport loading dock

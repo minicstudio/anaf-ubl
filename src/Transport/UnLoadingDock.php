@@ -73,7 +73,7 @@ class UnLoadingDock implements XmlSerializable
      */
     public function validate()
     {
-        if ($this->location) {
+        if (!$this->location) {
             throw new InvalidArgumentException('Location is required!');
         }
     }
@@ -86,15 +86,19 @@ class UnLoadingDock implements XmlSerializable
     public function xmlSerialize(Writer $writer): void
     {
         if ($this->codPtf) {
-            $writer->write([
+            $writer->writeAttributes([
                 'codPtf' => $this->codPtf,
             ]);
         }
 
         if ($this->codBirouVamal) {
-            $writer->write([
+            $writer->writeAttributes([
                 'codBirouVamal' => $this->codBirouVamal,
             ]);
         }
+
+        $writer->write([
+            'locatie' => $this->location,
+        ]);
     }
 }
