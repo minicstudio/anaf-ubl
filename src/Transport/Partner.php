@@ -77,10 +77,6 @@ class Partner implements XmlSerializable
             throw new InvalidArgumentException('Country code is required!');
         }
 
-        if (!$this->code) {
-            throw new InvalidArgumentException('Organization identifier is required!');
-        }
-
         if (!$this->name) {
             throw new InvalidArgumentException('Name is required!');
         }
@@ -97,8 +93,13 @@ class Partner implements XmlSerializable
 
         $writer->writeAttributes([
             'codTara' => $this->country_code,
-            'cod' => $this->code,
             'denumire' => $this->name,
         ]);
+
+        if ($this->code) {
+            $writer->writeAttributes([
+                'cod' => $this->code,
+            ]);
+        }
     }
 }

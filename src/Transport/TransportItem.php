@@ -9,13 +9,6 @@ use Sabre\Xml\XmlSerializable;
 class TransportItem implements XmlSerializable
 {
     /**
-     * Crt number
-     *
-     * @var string
-     */
-    private $crt_number;
-
-    /**
      * Tariff code
      *
      * @var string
@@ -72,16 +65,11 @@ class TransportItem implements XmlSerializable
     private $price_without_vat;
 
     /**
-     * Set the crt number
-     * @param string $crt_number
-     * @return self
+     * Declarant reference
+     *
+     * @var string
      */
-    public function setCrtNumber(string $crt_number): self
-    {
-        $this->crt_number = $crt_number;
-
-        return $this;
-    }
+    private $refDeclarant;
 
     /**
      * Set the tariff code
@@ -148,7 +136,7 @@ class TransportItem implements XmlSerializable
      * @param string $net_weight
      * @return self
      */
-    public function setNetWright(string $net_weight): self
+    public function setNetWeight(string $net_weight): self
     {
         $this->net_weight = $net_weight;
 
@@ -180,6 +168,18 @@ class TransportItem implements XmlSerializable
     }
 
     /**
+     * Set the declarant reference
+     * @param string $refDeclarant
+     * @return self
+     */
+    public function setReferenceDeclarant(string $refDeclarant): self
+    {
+        $this->refDeclarant = $refDeclarant;
+
+        return $this;
+    }
+
+    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
@@ -187,10 +187,6 @@ class TransportItem implements XmlSerializable
      */
     public function validate()
     {
-        if (!($this->crt_number)) {
-            throw new InvalidArgumentException('Crt number is required!');
-        }
-
         if (!$this->tariff_code) {
             throw new InvalidArgumentException('Tariff code is required!');
         }
@@ -232,7 +228,6 @@ class TransportItem implements XmlSerializable
     public function xmlSerialize(Writer $writer): void
     {
         $writer->writeAttributes([
-            'nrCrt' => $this->crt_number,
             'codTarifar' => $this->tariff_code,
             'denumireMarfa' => $this->product_name,
             'codScopOperatiune' => $this->purpose_operation_code,
@@ -242,5 +237,11 @@ class TransportItem implements XmlSerializable
             'greutateBruta' => $this->gross_weight,
             'valoareLeiFaraTva' => $this->price_without_vat,
         ]);
+
+        if ($this->refDeclarant) {
+            $writer->write([
+                'refDeclarant' => $this->refDeclarant,
+            ]);
+        }
     }
 }

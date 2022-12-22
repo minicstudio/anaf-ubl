@@ -94,7 +94,12 @@ class Confirmare implements XmlSerializable
         $writer->writeAttributes([
             'uit' => $this->uit,
             'tipConfirmare' => $this->confirmation_type,
-            'observatii' => $this->remarks,
         ]);
+
+        if ($this->remarks) {
+            $writer->writeAttributes([
+                'observatii' => $this->remarks,
+            ]);
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace MinicStudio\UBL;
 
 use MinicStudio\UBL\Invoice\Invoice;
+use MinicStudio\UBL\Saga\SagaInvoice;
 use MinicStudio\UBL\Transport\Transport;
 use Sabre\Xml\Service;
 
@@ -50,10 +51,27 @@ class Generator
         $xmlService = new Service();
 
         $xmlService->namespaceMap = [
-            'mfp:anaf:dgti:eTransport:declaratie:v1' => '',
+            'mfp:anaf:dgti:eTransport:declaratie:v2' => '',
             'http://www.w3.org/2001/XMLSchema-instance' => 'xsi',
         ];
 
         return $xmlService->write('eTransport', $transport);
+    }
+
+    /**
+     * Generates the saga invoice xml.
+     *
+     * @param SagaInvoice $sagaInvoice
+     * @return void
+     */
+    public static function sagaInvoice(SagaInvoice $sagaInvoice)
+    {
+        $xmlService = new Service();
+
+        $xmlService->namespaceMap = [
+            'Facturi' => '',
+        ];
+
+        return $xmlService->write('Facturi', $sagaInvoice);
     }
 }

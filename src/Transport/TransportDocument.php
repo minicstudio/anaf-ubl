@@ -9,11 +9,11 @@ use Sabre\Xml\XmlSerializable;
 class TransportDocument implements XmlSerializable
 {
     /**
-     * Operation type code
+     * Document type
      *
      * @var string
      */
-    private $cod_tip_operatiune;
+    private $document_type;
 
     /**
      * Document number
@@ -37,13 +37,13 @@ class TransportDocument implements XmlSerializable
     private $document_information;
 
     /**
-     * Set the operation type code
-     * @param string $cod_tip_operatiune
+     * Set the document type
+     * @param string $document_type
      * @return self
      */
-    public function setCodTipOperatiune(string $cod_tip_operatiune): self
+    public function setDocumentType(string $document_type): self
     {
-        $this->cod_tip_operatiune = $cod_tip_operatiune;
+        $this->document_type = $document_type;
 
         return $this;
     }
@@ -92,8 +92,8 @@ class TransportDocument implements XmlSerializable
      */
     public function validate()
     {
-        if (!$this->cod_tip_operatiune) {
-            throw new InvalidArgumentException('Operation type code is required!');
+        if (!$this->document_type) {
+            throw new InvalidArgumentException('Document type is required!');
         }
 
         if (!$this->document_date) {
@@ -109,10 +109,20 @@ class TransportDocument implements XmlSerializable
     public function xmlSerialize(Writer $writer): void
     {
         $writer->writeAttributes([
-            'tipDocument' => $this->cod_tip_operatiune,
-            'numarDocument' => $this->document_number,
+            'tipDocument' => $this->document_type,
             'dataDocument' => $this->document_date,
-            'observatii' => $this->document_information,
         ]);
+
+        if ($this->document_number) {
+            $writer->write([
+                'numarDocument' => $this->document_number,
+            ]);
+        }
+
+        if ($this->document_information) {
+            $writer->write([
+                'observatii' => $this->document_information,
+            ]);
+        }
     }
 }
