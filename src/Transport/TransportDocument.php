@@ -114,13 +114,13 @@ class TransportDocument implements XmlSerializable
         ]);
 
         if ($this->document_number) {
-            $writer->write([
+            $writer->writeAttributes([
                 'numarDocument' => $this->document_number,
             ]);
         }
 
         if ($this->document_information) {
-            $writer->write([
+            $writer->writeAttributes ([
                 'observatii' => $this->document_information,
             ]);
         }

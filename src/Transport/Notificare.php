@@ -9,18 +9,18 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 class Notificare implements XmlSerializable
 {
     /**
-     * Operation type code attribute
+     * Operation type code
      *
      * @var string
      */
-    private $operation_type_code_attribute;
+    private $operation_type_code;
 
     /**
-     * Operation type code element
+     * Prio notice
      *
      * @var string
      */
-    private $operation_type_code_element;
+    private $prio_notice;
 
     /**
      * Correction
@@ -76,21 +76,21 @@ class Notificare implements XmlSerializable
      * @param string $operation_type_code
      * @return self
      */
-    public function setOperationTypeCodeAsAttribute(string $operation_type_code): self
+    public function setOperationTypeCode(string $operation_type_code): self
     {
-        $this->operation_type_code_attribute = $operation_type_code;
+        $this->operation_type_code = $operation_type_code;
 
         return $this;
     }
 
     /**
-     * Set the operation type code
-     * @param string $operation_type_code
+     * Set prio notice
+     * @param NotificareAnterioare $prio_notice
      * @return self
      */
-    public function setOperationTypeCodeAsElement(string $operation_type_code): self
+    public function setPrioNotice(NotificareAnterioare $prio_notice): self
     {
-        $this->operation_type_code_element = $operation_type_code;
+        $this->prio_notice = $prio_notice;
 
         return $this;
     }
@@ -235,6 +235,10 @@ class Notificare implements XmlSerializable
         if (!count($this->documents)) {
             throw new InvalidArgumentException('No documents to transport.');
         }
+
+        if (!$this->operation_type_code) {
+            throw new InvalidArgumentException('Operation type code is not provided!');
+        }
     }
 
     /**
@@ -246,21 +250,15 @@ class Notificare implements XmlSerializable
     {
         $this->validate();
 
-        if ($this->operation_type_code_attribute) {
+        if ($this->operation_type_code) {
             $writer->writeAttributes([
-                'codTipOperatiune' => $this->operation_type_code_attribute,
+                'codTipOperatiune' => $this->operation_type_code,
             ]);
         }
 
         if ($this->correction) {
             $writer->write([
                 'corectie' => $this->correction,
-            ]);
-        }
-
-        if ($this->operation_type_code_element) {
-            $writer->write([
-                'codTipOperatiune' => $this->operation_type_code_element,
             ]);
         }
         
@@ -289,6 +287,12 @@ class Notificare implements XmlSerializable
         foreach ($this->documents as $document) {
             $writer->write([
                 'documenteTransport' => $document,
+            ]);
+        }
+
+        if ($this->prio_notice) {
+            $writer->write([
+                'notificareAnterioara' => $this->prio_notice,
             ]);
         }
     }

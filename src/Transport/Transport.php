@@ -170,13 +170,13 @@ class Transport implements XmlSerializable
         ]);
 
         if ($this->refDeclarant) {
-            $writer->write([
+            $writer->writeAttributes([
                 'refDeclarant' => $this->refDeclarant,
             ]);
         }
 
         if ($this->declPostAvarie) {
-            $writer->write([
+            $writer->writeAttributes([
                 'declPostAvarie' => $this->declPostAvarie,
             ]);
         }
