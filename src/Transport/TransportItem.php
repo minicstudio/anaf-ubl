@@ -148,7 +148,7 @@ class TransportItem implements XmlSerializable
      * @param string $gross_weight
      * @return self
      */
-    public function setGrossWright(string $gross_weight): self
+    public function setGrossWeight(string $gross_weight): self
     {
         $this->gross_weight = $gross_weight;
 

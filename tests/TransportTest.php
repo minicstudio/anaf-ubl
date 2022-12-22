@@ -7,6 +7,7 @@ use MinicStudio\UBL\Transport\Confirmare;
 use MinicStudio\UBL\Transport\Correction;
 use MinicStudio\UBL\Transport\Location;
 use MinicStudio\UBL\Transport\Notificare;
+use MinicStudio\UBL\Transport\NotificareAnterioare;
 use MinicStudio\UBL\Transport\Partner;
 use MinicStudio\UBL\Transport\Date;
 use MinicStudio\UBL\Transport\Delete;
@@ -70,7 +71,7 @@ class TransportTest extends TestCase
             ->setQuantity('50.5')
             ->setUnitOfMeasureCode('10')
             ->setNetWeight('50.5')
-            ->setGrossWright('50.5')
+            ->setGrossWeight('50.5')
             ->setPriceWithoutVat('50')
         ];
 
@@ -80,15 +81,20 @@ class TransportTest extends TestCase
             ->setDocumentDate('2022-11-11')
         ];
 
+        //Transport notificare anterioare
+        $prio_notice = (new NotificareAnterioare)
+            ->setUit('3V0P0L0P0T3JUW46');
+
         // Transport notification
         $notificare = (new Notificare)
-            ->setOperationTypeCodeAsAttribute('30')
+            ->setOperationTypeCode('40')
             ->setPartner($partner)
             ->setDate($date)
             ->setLoadingDock($loading_dock)
             ->setUnLoadingDock($un_loading_dock)
             ->setItems($items)
-            ->setDocuments($documents);
+            ->setDocuments($documents)
+            ->setPrioNotice($prio_notice);
 
         // Transport
         $transport = (new Transport())
@@ -252,7 +258,7 @@ class TransportTest extends TestCase
             ->setQuantity('50.5')
             ->setUnitOfMeasureCode('10')
             ->setNetWeight('50.5')
-            ->setGrossWright('50.5')
+            ->setGrossWeight('50.5')
             ->setPriceWithoutVat('50')
         ];
 
@@ -266,16 +272,21 @@ class TransportTest extends TestCase
         $correction = (new Correction)
             ->setUit('4C0U0C0J0W3DDQ92');
 
+        //Transport notificare anterioare
+        $prio_notice = (new NotificareAnterioare)
+            ->setUit('3V0P0L0P0T3JUW46');
+
         // Transport notification corretion
         $notificare = (new Notificare)
-            ->setOperationTypeCodeAsAttribute('30')
+            ->setOperationTypeCode('40')
             ->setPartner($partner)
             ->setDate($date)
             ->setLoadingDock($loading_dock)
             ->setUnLoadingDock($un_loading_dock)
             ->setItems($items)
             ->setDocuments($documents)
-            ->setCorrection($correction);
+            ->setCorrection($correction)
+            ->setPrioNotice($prio_notice);
 
         // Transport corretion
         $transport = (new Transport())
