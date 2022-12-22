@@ -177,12 +177,27 @@ class Date implements XmlSerializable
 
         $writer->writeAttributes([
             'nrVehicul' => $this->car_number,
-            'nrRemorca1' => $this->trailer_number_1,
-            'nrRemorca2' => $this->trailer_number_2,
-            'codTaraTransportator' => $this->transport_country_code,
-            'codTransportator' => $this->transport_code,
-            'denumireTransportator' => $this->transport_name,
+            'codTaraOrgTransport' => $this->transport_country_code,
+            'denumireOrgTransport' => $this->transport_name,
             'dataTransport' => $this->transport_date,
         ]);
+
+        if ($this->trailer_number_1) {
+            $writer->writeAttributes([
+                'nrRemorca1' => $this->trailer_number_1,
+            ]);
+        }
+
+        if ($this->trailer_number_2) {
+            $writer->writeAttributes([
+                'nrRemorca2' => $this->trailer_number_2,
+            ]);
+        }
+
+        if ($this->transport_code) {
+            $writer->writeAttributes([
+                'codOrgTransport' => $this->transport_code,
+            ]);
+        }
     }
 }

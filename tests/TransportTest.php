@@ -2,8 +2,10 @@
 
 namespace MinicStudio\UBL\Tests;
 
+use Locale;
 use MinicStudio\UBL\Transport\Confirmare;
 use MinicStudio\UBL\Transport\Correction;
+use MinicStudio\UBL\Transport\Location;
 use MinicStudio\UBL\Transport\Notificare;
 use MinicStudio\UBL\Transport\Partner;
 use MinicStudio\UBL\Transport\Date;
@@ -13,6 +15,7 @@ use MinicStudio\UBL\Transport\Transport;
 use MinicStudio\UBL\Transport\TransportDocument;
 use MinicStudio\UBL\Transport\TransportItem;
 use MinicStudio\UBL\Transport\UnLoadingDock;
+use MinicStudio\UBL\Transport\VehicleModification;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,7 +23,7 @@ use PHPUnit\Framework\TestCase;
  */
 class TransportTest extends TestCase
 {
-    private $schema = '../anaf-ubl/SchemaSimtic.xsd';
+    private $schema = '../anaf-ubl/schema_ETR_v2_20221215.xsd';
 
     /**
      * Test the notification
@@ -45,51 +48,36 @@ class TransportTest extends TestCase
             ->setTransportName('Minic Studio')
             ->setTransportDate('2022-11-11');
 
+        // Transport location
+        $location = (new Location)
+            ->setCountyCode('6')
+            ->setCity('Odorhei')
+            ->setStreet('Bechlean');
+
         // Transport loading dock
         $loading_dock = (new LoadingDock)
-            ->setCountyCode('1')
-            ->setCity('Odorheiu Scuiesc')
-            ->setStreet('Bechlean')
-            ->setAddressNumber('198')
-            ->setBlockNumber('7')
-            ->setStairs('2')
-            ->setFloor('2')
-            ->setApartmentNumber('15')
-            ->setInformation('nothing')
-            ->setPostCode('456789');
+            ->setLocation($location);
 
         // Transport unloading dock
         $un_loading_dock = (new UnLoadingDock)
-            ->setCountyCode('1')
-            ->setCity('Odorheiu Scuiesc')
-            ->setStreet('Bechlean')
-            ->setAddressNumber('198')
-            ->setBlockNumber('7')
-            ->setStairs('2')
-            ->setFloor('2')
-            ->setApartmentNumber('15')
-            ->setInformation('nothing')
-            ->setPostCode('456789');
+            ->setLocation($location);
 
         // Transport product
         $items = [(new TransportItem)
-            ->setCrtNumber('2')
             ->setTariffCode('2020')
             ->setProductName('product')
-            ->setPurposeOperationCode('300101')
+            ->setPurposeOperationCode('401')
             ->setQuantity('50.5')
             ->setUnitOfMeasureCode('10')
-            ->setNetWright('50.5')
+            ->setNetWeight('50.5')
             ->setGrossWright('50.5')
             ->setPriceWithoutVat('50')
         ];
 
         // Transport document
         $documents = [(new TransportDocument)
-            ->setCodTipOperatiune('10')
-            ->setDocumentNumber('2')
+            ->setDocumentType('10')
             ->setDocumentDate('2022-11-11')
-            ->setDocumentInformation('nothing')
         ];
 
         // Transport notification
@@ -105,7 +93,6 @@ class TransportTest extends TestCase
         // Transport
         $transport = (new Transport())
             ->setCodDeclarant('159')
-            ->setReferenceDeclarant('159')
             ->setNotificare($notificare);
 
         // Test created object
@@ -139,7 +126,6 @@ class TransportTest extends TestCase
         // Transport
         $transport = (new Transport())
             ->setCodDeclarant('159')
-            ->setReferenceDeclarant('159')
             ->setConfirmation($confirmation);
 
         // Test created object
@@ -171,7 +157,6 @@ class TransportTest extends TestCase
         // Transport
         $transport = (new Transport())
             ->setCodDeclarant('159')
-            ->setReferenceDeclarant('159')
             ->setDelete($delete);
 
         // Test created object
@@ -185,6 +170,39 @@ class TransportTest extends TestCase
         $dom->loadXML($outputXMLString);
 
         $dom->save('./tests/generated_files/StergereTest.xml');
+
+        $this->assertEquals(true, $dom->schemaValidate($this->schema));
+    }
+
+    /**
+     * Test modifVehicul
+     * @param \MinicStudio\UBL\Transport\VehicleModification
+     * @return void
+     */
+    public function testVehicleModificationXML()
+    {
+        // Transport vehicle modification
+        $vehicleModification = (new VehicleModification)
+            ->setUit('3V0P0L0P0T3JUW46')
+            ->setCrtNumber('B111ABC')
+            ->setModificationDate('2009-10-10T12:00:00-05:00');
+
+        // Transport
+        $transport = (new Transport())
+            ->setCodDeclarant('159')
+            ->setVehicleModification($vehicleModification);
+
+        // Test created object
+        // Use \MinicStudio\UBL\Generator to generate an XML string
+        $generator = new \MinicStudio\UBL\Generator();
+        $outputXMLString = $generator->transport($transport);
+
+        // Create PHP Native DomDocument object, that can be
+        // used to validate the generate XML
+        $dom = new \DOMDocument;
+        $dom->loadXML($outputXMLString);
+
+        $dom->save('./tests/generated_files/VehicleModificationTest.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
@@ -212,51 +230,36 @@ class TransportTest extends TestCase
             ->setTransportName('Minic Studio')
             ->setTransportDate('2022-11-11');
 
-        // Transport loading dock corretion
-        $loading_dock = (new LoadingDock)
-            ->setCountyCode('1')
-            ->setCity('Bucuresti')
-            ->setStreet('Caramidariei')
-            ->setAddressNumber('198')
-            ->setBlockNumber('7')
-            ->setStairs('2')
-            ->setFloor('2')
-            ->setApartmentNumber('15')
-            ->setInformation('nothing')
-            ->setPostCode('456789');
+        // Transport location
+        $location = (new Location)
+            ->setCountyCode('6')
+            ->setCity('Odorhei')
+            ->setStreet('Bechlean');
 
-        // Transport unloading dock corretion
+        // Transport loading dock
+        $loading_dock = (new LoadingDock)
+            ->setLocation($location);
+
+        // Transport unloading dock
         $un_loading_dock = (new UnLoadingDock)
-            ->setCountyCode('1')
-            ->setCity('Bucuresti')
-            ->setStreet('Caramidariei')
-            ->setAddressNumber('198')
-            ->setBlockNumber('7')
-            ->setStairs('2')
-            ->setFloor('2')
-            ->setApartmentNumber('15')
-            ->setInformation('nothing')
-            ->setPostCode('456789');
+            ->setLocation($location);
 
         // Transport product corretion
         $items = [(new TransportItem)
-            ->setCrtNumber('2')
             ->setTariffCode('2020')
             ->setProductName('product')
-            ->setPurposeOperationCode('300101')
+            ->setPurposeOperationCode('401')
             ->setQuantity('50.5')
             ->setUnitOfMeasureCode('10')
-            ->setNetWright('50.5')
+            ->setNetWeight('50.5')
             ->setGrossWright('50.5')
             ->setPriceWithoutVat('50')
         ];
 
         // Transport document corretion
         $documents = [(new TransportDocument)
-            ->setCodTipOperatiune('10')
-            ->setDocumentNumber('2')
+            ->setDocumentType('10')
             ->setDocumentDate('2022-11-11')
-            ->setDocumentInformation('nothing')
         ];
 
         // Transport corretion
@@ -277,7 +280,6 @@ class TransportTest extends TestCase
         // Transport corretion
         $transport = (new Transport())
             ->setCodDeclarant('159')
-            ->setReferenceDeclarant('referinta declarant')
             ->setNotificare($notificare);
 
         // Test created object

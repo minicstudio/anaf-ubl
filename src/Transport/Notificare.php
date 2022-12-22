@@ -279,11 +279,11 @@ class Notificare implements XmlSerializable
         ]);
 
         $writer->write([
-            'locIncarcare' => $this->loading_dock,
+            'locStartTraseuRutier' => $this->loading_dock,
         ]);
 
         $writer->write([
-            'locDescarcare' => $this->un_loading_dock,
+            'locFinalTraseuRutier' => $this->un_loading_dock,
         ]);
 
         foreach ($this->documents as $document) {

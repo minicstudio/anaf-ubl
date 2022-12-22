@@ -9,191 +9,58 @@ use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 class LoadingDock implements XmlSerializable
 {
     /**
-     * Country code
+     * CodPtf
      *
      * @var string
      */
-    private $county_code;
+    private $codPtf;
 
     /**
-     * City name
+     * codBirouVamal
      *
      * @var string
      */
-    private $city;
+    private $codBirouVamal;
 
     /**
-     * Street name
+     * Location
      *
      * @var string
      */
-    private $street;
+    private $location;
 
     /**
-     * Address number
-     *
-     * @var string
-     */
-    private $address_number;
-
-    /**
-     * Block number
-     *
-     * @var string
-     */
-    private $block_number;
-
-    /**
-     * Stairs number
-     *
-     * @var string
-     */
-    private $stairs;
-
-    /**
-     * Floor number
-     *
-     * @var string
-     */
-    private $floor;
-
-    /**
-     * Apartment number
-     *
-     * @var string
-     */
-    private $apartment_number;
-
-    /**
-     * Information
-     *
-     * @var string
-     */
-    private $information;
-
-    /**
-     * Post code
-     *
-     * @var string
-     */
-    private $post_code;
-    
-    /**
-     * Set county code
-     * @param string $county_code
+     * Set the codPtf
+     * @param string $codPtf
      * @return self
      */
-    public function setCountyCode(string $county_code): self
+    public function setCodPtf(string $codPtf): self
     {
-        $this->county_code = $county_code;
+        $this->codPtf = $codPtf;
 
         return $this;
     }
 
     /**
-     * Set the city name
-     * @param string $city
+     * Set the codBirouVamal
+     * @param string $codBirouVamal
      * @return self
      */
-    public function setCity(string $city): self
+    public function setCodBirouVamal(string $codBirouVamal): self
     {
-        $this->city = $city;
+        $this->codBirouVamal = $codBirouVamal;
 
         return $this;
     }
 
     /**
-     * Set the street name
-     * @param string $street
+     * Set the location
+     * @param Location $location
      * @return self
      */
-    public function setStreet(string $street): self
+    public function setLocation(Location $location): self
     {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    /**
-     * Set the address number
-     * @param string $address_number
-     * @return self
-     */
-    public function setAddressNumber(string $address_number): self
-    {
-        $this->address_number = $address_number;
-
-        return $this;
-    }
-
-    /**
-     * Set the block number
-     * @param string $block_number
-     * @return self
-     */
-    public function setBlockNumber(string $block_number): self
-    {
-        $this->block_number = $block_number;
-
-        return $this;
-    }
-
-    /**
-     * Set the stairs
-     * @param string $stairs
-     * @return self
-     */
-    public function setStairs(string $stairs): self
-    {
-        $this->stairs = $stairs;
-
-        return $this;
-    }
-
-    /**
-     * Set the floor
-     * @param string $floor
-     * @return self
-     */
-    public function setFloor(string $floor): self
-    {
-        $this->floor = $floor;
-
-        return $this;
-    }
-
-    /**
-     * Set the apartment number
-     * @param string $apartment_number
-     * @return self
-     */
-    public function setApartmentNumber(string $apartment_number): self
-    {
-        $this->apartment_number = $apartment_number;
-
-        return $this;
-    }
-
-    /**
-     * Set the information
-     * @param string $information
-     * @return self
-     */
-    public function setInformation(string $information): self
-    {
-        $this->information = $information;
-
-        return $this;
-    }
-
-    /**
-     * Set the post code
-     * @param string $post_code
-     * @return self
-     */
-    public function setPostCode(string $post_code): self
-    {
-        $this->post_code = $post_code;
+        $this->location = $location;
 
         return $this;
     }
@@ -206,16 +73,8 @@ class LoadingDock implements XmlSerializable
      */
     public function validate()
     {
-        if (!$this->county_code) {
-            throw new InvalidArgumentException('County name is required!');
-        }
-
-        if (!$this->city) {
-            throw new InvalidArgumentException('City name is required!');
-        }
-
-        if (!$this->street) {
-            throw new InvalidArgumentException('Street name is required!');
+        if (!$this->location) {
+            throw new InvalidArgumentException('Location is required!');
         }
     }
 
@@ -226,19 +85,20 @@ class LoadingDock implements XmlSerializable
      */
     public function xmlSerialize(Writer $writer): void
     {
-        $this->validate();
+        if ($this->codPtf) {
+            $writer->writeAttributes([
+                'codPtf' => $this->codPtf,
+            ]);
+        }
 
-        $writer->writeAttributes([
-            'codJudet' => $this->county_code,
-            'denumireLocalitate' => $this->city,
-            'denumireStrada' => $this->street,
-            'numar' => $this->address_number,
-            'bloc' => $this->block_number,
-            'scara' => $this->stairs,
-            'etaj' => $this->floor,
-            'apartament' => $this->apartment_number,
-            'alteInfo' => $this->information,
-            'codPostal' => $this->post_code,
+        if ($this->codBirouVamal) {
+            $writer->writeAttributes([
+                'codBirouVamal' => $this->codBirouVamal,
+            ]);
+        }
+
+        $writer->write([
+            'locatie' => $this->location,
         ]);
     }
 }
