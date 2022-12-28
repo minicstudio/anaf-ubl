@@ -21,9 +21,9 @@ class Generator
      *
      * @param Invoice $invoice
      * @param $currencyID
-     * @return void
+     * @return string
      */
-    public static function invoice(Invoice $invoice, $currencyId = 'EUR')
+    public static function invoice(Invoice $invoice, $currencyId = 'EUR'): string
     {
         self::$currencyID = $currencyId;
 
@@ -44,9 +44,9 @@ class Generator
      * Generates the transport xml.
      *
      * @param Transport $transport
-     * @return void
+     * @return string
      */
-    public static function transport(Transport $transport)
+    public static function transport(Transport $transport): string
     {
         $xmlService = new Service();
 
@@ -62,9 +62,9 @@ class Generator
      * Generates the saga invoice xml.
      *
      * @param SagaInvoice $sagaInvoice
-     * @return void
+     * @return string
      */
-    public static function sagaInvoice(SagaInvoice $sagaInvoice)
+    public static function sagaInvoice(SagaInvoice $sagaInvoice): string
     {
         $xmlService = new Service();
 
