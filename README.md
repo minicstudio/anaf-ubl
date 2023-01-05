@@ -6,8 +6,22 @@ A modern object-oriented PHP library to create valid UBL files. Please feel free
 
 This package requires PHP 8.0 or higher. Installation can be done through [composer](https://www.getcomposer.org).
 
-```sh
-$ composer require num-num/ubl-invoice
+The package has to be added manually into the `composer.json` file
+```json
+"require": {
+    ...
+    "minicstudio/anaf-ubl": "^2.0"
+}
+```
+
+Then we also need to specify where package can be found as it is not listed as a composer package, so add the following into the `composer.json` file.
+```json
+"repositories": {
+    "anaf-ubl": {
+        "type": "vcs",
+        "url": "git@github.com:minicstudio/anaf-ubl.git"
+    } 
+}
 ```
 
 ## Contributing
