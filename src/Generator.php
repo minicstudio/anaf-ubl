@@ -15,7 +15,22 @@ class Generator
      *
      * @var string
      */
-    public static $currencyID;
+    public $currencyID;
+
+    /**
+     * Validate the xml
+     * 
+     * @param string $xml
+     * @param string $validation_file
+     * @return void
+     */
+    public function validate(string $xml, string $validation_file): bool
+    {
+        $dom = new \DOMDocument;
+        $dom->loadXML($xml);
+
+        return $dom->schemaValidate($validation_file);
+    }
 
     /**
      * Generates the invoice xml.
@@ -24,9 +39,9 @@ class Generator
      * @param $currencyID
      * @return string
      */
-    public static function invoice(Invoice $invoice, $currencyId = 'EUR'): string
+    public function invoice(Invoice $invoice, $currencyId = 'EUR'): string
     {
-        self::$currencyID = $currencyId;
+        $this->currencyID = $currencyId;
 
         $xmlService = new Service();
 
@@ -45,9 +60,10 @@ class Generator
      * Generates the transport v1 xml.
      *
      * @param TransportV1 $transport
+     * @param bool $validate
      * @return string
      */
-    public static function transportV1(TransportV1 $transport): string
+    public function transportV1(TransportV1 $transport, bool $validate = false): string
     {
         $xmlService = new Service();
 
@@ -56,16 +72,23 @@ class Generator
             'http://www.w3.org/2001/XMLSchema-instance' => 'xsi',
         ];
 
-        return $xmlService->write('eTransport', $transport);
+        $xml = $xmlService->write('eTransport', $transport);
+
+        if ($validate) {
+            $this->validate($xml, 'schema_etransport_v1.xsd');
+        }
+
+        return $xml;
     }
 
     /**
      * Generates the transport v2 xml.
      *
      * @param TransportV2 $transport
+     * @param bool $validate
      * @return string
      */
-    public static function transportV2(TransportV2 $transport): string
+    public function transportV2(TransportV2 $transport, bool $validate = false): string
     {
         $xmlService = new Service();
 
@@ -74,7 +97,13 @@ class Generator
             'http://www.w3.org/2001/XMLSchema-instance' => 'xsi',
         ];
 
-        return $xmlService->write('eTransport', $transport);
+        $xml = $xmlService->write('eTransport', $transport);
+
+        if ($validate) {
+            $this->validate($xml, 'schema_etransport_v2_20221215.xsd');
+        }
+
+        return $xml;
     }
 
     /**

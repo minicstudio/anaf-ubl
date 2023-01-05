@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
  */
 class TransportTestV1 extends TestCase
 {
-    private $schema = 'SchemaSimtic.xsd';
+    private $schema = 'schema_etransport_v1.xsd';
 
     /**
      * Test the notification
@@ -96,7 +96,7 @@ class TransportTestV1 extends TestCase
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
-        $outputXMLString = $generator->transportV1($transport);
+        $outputXMLString = $generator->transportV1($transport, true);
 
         // Create PHP Native DomDocument object, that can be
         // used to validate the generate XML

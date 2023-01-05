@@ -23,7 +23,7 @@ use PHPUnit\Framework\TestCase;
  */
 class TransportTestV2 extends TestCase
 {
-    private $schema = 'schema_ETR_v2_20221215.xsd';
+    private $schema = 'schema_etransport_v2_20221215.xsd';
 
     /**
      * Test the notification
@@ -43,7 +43,7 @@ class TransportTestV2 extends TestCase
             ->setCarNumber('B111ABC')
             ->setTrailerNumberOne('B111ABC')
             ->setTrailerNumberTwo('B111ABC')
-            ->setTransportCountryCode('RO')
+            ->setTransportCountryCode('HUSSS')
             ->setTransportCode('1234567')
             ->setTransportName('Minic Studio')
             ->setTransportDate('2022-11-11');
@@ -103,7 +103,7 @@ class TransportTestV2 extends TestCase
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
-        $outputXMLString = $generator->transportV2($transport);
+        $outputXMLString = $generator->transportV2($transport, true);
 
         // Create PHP Native DomDocument object, that can be
         // used to validate the generate XML
