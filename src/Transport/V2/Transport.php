@@ -2,8 +2,8 @@
 
 namespace MinicStudio\UBL\Transport\V2;
 
-use MinicStudio\UBL\Transport\Confirmare;
-use MinicStudio\UBL\Transport\Delete;
+use MinicStudio\UBL\Transport\V1\Confirmare;
+use MinicStudio\UBL\Transport\V1\Delete;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 

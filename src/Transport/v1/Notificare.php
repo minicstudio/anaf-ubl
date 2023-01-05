@@ -1,6 +1,6 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V1;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;

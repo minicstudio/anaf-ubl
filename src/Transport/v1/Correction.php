@@ -1,33 +1,19 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V1;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
-class NotificareAnterioare implements XmlSerializable
+class Correction implements XmlSerializable
 {
-     /**
+    /**
      * Uit
      *
      * @var string
      */
     private $uit;
-
-    /**
-     * Remarks
-     *
-     * @var string
-     */
-    private $remarks;
-
-    /**
-     * Post accident declaration
-     *
-     * @var string
-     */
-    private $refDeclarant;
     
     /**
      * Set the uit
@@ -37,30 +23,6 @@ class NotificareAnterioare implements XmlSerializable
     public function setUit(string $uit): self
     {
         $this->uit = $uit;
-
-        return $this;
-    }
-
-    /**
-     * Set the declarant reference
-     * @param string $refDeclarant
-     * @return self
-     */
-    public function setReferenceDeclarant(string $refDeclarant): self
-    {
-        $this->refDeclarant = $refDeclarant;
-
-        return $this;
-    }
-
-    /**
-     * Set remarks
-     * @param string $remarks
-     * @return self
-     */
-    public function setRemarks(string $remarks): self
-    {
-        $this->remarks = $remarks;
 
         return $this;
     }
@@ -90,17 +52,5 @@ class NotificareAnterioare implements XmlSerializable
         $writer->writeAttributes([
             'uit' => $this->uit,
         ]);
-
-        if ($this->refDeclarant) {
-            $writer->writeAttributes([
-                'refDeclarant' => $this->refDeclarant,
-            ]);
-        }
-
-        if ($this->remarks) {
-            $writer->writeAttributes([
-                'observatii' => $this->remarks,
-            ]);
-        }
     }
 }

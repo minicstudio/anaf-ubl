@@ -2,18 +2,18 @@
 
 namespace MinicStudio\UBL\Tests;
 
-use MinicStudio\UBL\Transport\Confirmare;
-use MinicStudio\UBL\Transport\Correction;
-use MinicStudio\UBL\Transport\Notificare;
-use MinicStudio\UBL\Transport\NotificareAnterioare;
-use MinicStudio\UBL\Transport\Partner;
-use MinicStudio\UBL\Transport\Date;
-use MinicStudio\UBL\Transport\Delete;
-use MinicStudio\UBL\Transport\LoadingDock;
-use MinicStudio\UBL\Transport\Transport;
-use MinicStudio\UBL\Transport\TransportDocument;
-use MinicStudio\UBL\Transport\TransportItem;
-use MinicStudio\UBL\Transport\UnLoadingDock;
+use MinicStudio\UBL\Transport\V1\Confirmare;
+use MinicStudio\UBL\Transport\V1\Correction;
+use MinicStudio\UBL\Transport\V1\Notificare;
+use MinicStudio\UBL\Transport\V1\NotificareAnterioare;
+use MinicStudio\UBL\Transport\V1\Partner;
+use MinicStudio\UBL\Transport\V1\Date;
+use MinicStudio\UBL\Transport\V1\Delete;
+use MinicStudio\UBL\Transport\V1\LoadingDock;
+use MinicStudio\UBL\Transport\V1\Transport;
+use MinicStudio\UBL\Transport\V1\TransportDocument;
+use MinicStudio\UBL\Transport\V1\TransportItem;
+use MinicStudio\UBL\Transport\V1\UnLoadingDock;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,11 +21,11 @@ use PHPUnit\Framework\TestCase;
  */
 class TransportTestV1 extends TestCase
 {
-    private $schema = '../anaf-ubl/SchemaSimtic.xsd';
+    private $schema = 'SchemaSimtic.xsd';
 
     /**
      * Test the notification
-     * @param \MinicStudio\UBL\Transport\Notificare
+     * @param \MinicStudio\UBL\Transport\V1\Notificare
      * @return void
      */
     public function testNotificareXML()
@@ -110,7 +110,7 @@ class TransportTestV1 extends TestCase
 
     /**
      * Test the confirmation
-     * @param \MinicStudio\UBL\Transport\Confirmare
+     * @param \MinicStudio\UBL\Transport\V1\Confirmare
      * @return void
      */
     public function testConfirmareXML()
@@ -142,7 +142,7 @@ class TransportTestV1 extends TestCase
 
     /**
      * Test delete
-     * @param \MinicStudio\UBL\Transport\Delete
+     * @param \MinicStudio\UBL\Transport\V1\Delete
      * @return void
      */
     public function testStergereXML()
@@ -173,7 +173,7 @@ class TransportTestV1 extends TestCase
 
     /**
      * Test the correction
-     * @param \MinicStudio\UBL\Transport\Correction
+     * @param \MinicStudio\UBL\Transport\V1\Correction
      * @return void
      */
     public function testCorrectie1807XML()

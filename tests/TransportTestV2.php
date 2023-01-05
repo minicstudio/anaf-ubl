@@ -2,11 +2,11 @@
 
 namespace MinicStudio\UBL\Tests;
 
-use MinicStudio\UBL\Transport\Confirmare;
-use MinicStudio\UBL\Transport\Correction;
-use MinicStudio\UBL\Transport\NotificareAnterioare;
-use MinicStudio\UBL\Transport\Partner;
-use MinicStudio\UBL\Transport\Delete;
+use MinicStudio\UBL\Transport\V1\Confirmare;
+use MinicStudio\UBL\Transport\V1\Correction;
+use MinicStudio\UBL\Transport\V1\NotificareAnterioare;
+use MinicStudio\UBL\Transport\V1\Partner;
+use MinicStudio\UBL\Transport\V1\Delete;
 use MinicStudio\UBL\Transport\V2\Location;
 use MinicStudio\UBL\Transport\V2\Notificare;
 use MinicStudio\UBL\Transport\V2\LoadingDock;
@@ -23,11 +23,11 @@ use PHPUnit\Framework\TestCase;
  */
 class TransportTestV2 extends TestCase
 {
-    private $schema = '../anaf-ubl/schema_ETR_v2_20221215.xsd';
+    private $schema = 'schema_ETR_v2_20221215.xsd';
 
     /**
      * Test the notification
-     * @param \MinicStudio\UBL\Transport\Notificare
+     * @param \MinicStudio\UBL\Transport\V1\Notificare
      * @return void
      */
     public function testNotificareXML()
@@ -117,7 +117,7 @@ class TransportTestV2 extends TestCase
 
     /**
      * Test the confirmation
-     * @param \MinicStudio\UBL\Transport\Confirmare
+     * @param \MinicStudio\UBL\Transport\V1\Confirmare
      * @return void
      */
     public function testConfirmareXML()
@@ -150,7 +150,7 @@ class TransportTestV2 extends TestCase
 
     /**
      * Test delete
-     * @param \MinicStudio\UBL\Transport\Delete
+     * @param \MinicStudio\UBL\Transport\V1\Delete
      * @return void
      */
     public function testStergereXML()

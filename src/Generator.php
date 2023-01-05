@@ -4,8 +4,8 @@ namespace MinicStudio\UBL;
 
 use MinicStudio\UBL\Invoice\Invoice;
 use MinicStudio\UBL\Saga\SagaInvoice;
-use MinicStudio\UBL\Transport\Transport as TransportV1;
-use MinicStudio\UBL\Transport\V2\Transport as TransportV2;
+use MinicStudio\UBL\Transport\V1\Transport as TransportV1;
+use MinicStudio\UBL\Transport\v2\Transport as TransportV2;
 use Sabre\Xml\Service;
 
 class Generator
