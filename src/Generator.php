@@ -75,7 +75,7 @@ class Generator
         $xml = $xmlService->write('eTransport', $transport);
 
         if ($validate) {
-            $this->validate($xml, 'schema_etransport_v1.xsd');
+            $this->validate($xml, dirname(__FILE__).'/../schema_etransport_v1.xsd');
         }
 
         return $xml;
@@ -100,7 +100,7 @@ class Generator
         $xml = $xmlService->write('eTransport', $transport);
 
         if ($validate) {
-            $this->validate($xml, 'schema_etransport_v2_20221215.xsd');
+            $this->validate($xml, dirname(__FILE__).'/../schema_etransport_v2_20221215.xsd');
         }
 
         return $xml;

@@ -43,7 +43,7 @@ class TransportTestV2 extends TestCase
             ->setCarNumber('B111ABC')
             ->setTrailerNumberOne('B111ABC')
             ->setTrailerNumberTwo('B111ABC')
-            ->setTransportCountryCode('HUSSS')
+            ->setTransportCountryCode('HU')
             ->setTransportCode('1234567')
             ->setTransportName('Minic Studio')
             ->setTransportDate('2022-11-11');
@@ -214,7 +214,7 @@ class TransportTestV2 extends TestCase
 
     /**
      * Test the correction
-     * @param \MinicStudio\UBL\Transport\Correction
+     * @param \MinicStudio\UBL\Transport\V1\Correction
      * @return void
      */
     public function testCorrectie1807XML()
