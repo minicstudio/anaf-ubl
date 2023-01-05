@@ -4,7 +4,8 @@ namespace MinicStudio\UBL;
 
 use MinicStudio\UBL\Invoice\Invoice;
 use MinicStudio\UBL\Saga\SagaInvoice;
-use MinicStudio\UBL\Transport\Transport;
+use MinicStudio\UBL\Transport\Transport as TransportV1;
+use MinicStudio\UBL\Transport\V2\Transport as TransportV2;
 use Sabre\Xml\Service;
 
 class Generator
@@ -41,12 +42,30 @@ class Generator
     }
     
     /**
-     * Generates the transport xml.
+     * Generates the transport v1 xml.
      *
-     * @param Transport $transport
+     * @param TransportV1 $transport
      * @return string
      */
-    public static function transport(Transport $transport): string
+    public static function transportV1(TransportV1 $transport): string
+    {
+        $xmlService = new Service();
+
+        $xmlService->namespaceMap = [
+            'mfp:anaf:dgti:eTransport:declaratie:v1' => '',
+            'http://www.w3.org/2001/XMLSchema-instance' => 'xsi',
+        ];
+
+        return $xmlService->write('eTransport', $transport);
+    }
+
+    /**
+     * Generates the transport v2 xml.
+     *
+     * @param TransportV2 $transport
+     * @return string
+     */
+    public static function transportV2(TransportV2 $transport): string
     {
         $xmlService = new Service();
 

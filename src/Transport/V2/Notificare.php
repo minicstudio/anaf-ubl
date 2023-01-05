@@ -1,7 +1,10 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V2;
 
+use MinicStudio\UBL\Transport\Correction;
+use MinicStudio\UBL\Transport\NotificareAnterioare;
+use MinicStudio\UBL\Transport\Partner;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
@@ -277,11 +280,11 @@ class Notificare implements XmlSerializable
         ]);
 
         $writer->write([
-            'locIncarcare' => $this->loading_dock,
+            'locStartTraseuRutier' => $this->loading_dock,
         ]);
 
         $writer->write([
-            'locDescarcare' => $this->un_loading_dock,
+            'locFinalTraseuRutier' => $this->un_loading_dock,
         ]);
 
         foreach ($this->documents as $document) {

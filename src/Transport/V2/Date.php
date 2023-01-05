@@ -1,6 +1,6 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V2;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
@@ -56,20 +56,6 @@ class Date implements XmlSerializable
      * @var string
      */
     private $transport_date;
-
-    /**
-     * Code prf
-     *
-     * @var string
-     */
-    private $code_ptf;
-
-    /**
-     * Cod birou vamal
-     *
-     * @var string
-     */
-    private $cod_birou_vamal;
     
     /**
      * Set the car number
@@ -156,30 +142,6 @@ class Date implements XmlSerializable
     }
 
     /**
-     * Set code ptf
-     * @param string $code_ptf
-     * @return self
-     */
-    public function setCodePtf(string $code_ptf): self
-    {
-        $this->code_ptf = $code_ptf;
-
-        return $this;
-    }
-
-    /**
-     * Set the cod birou vamal
-     * @param string $cod_birou_vamal
-     * @return self
-     */
-    public function setCodBirouVamal(string $cod_birou_vamal): self
-    {
-        $this->cod_birou_vamal = $cod_birou_vamal;
-
-        return $this;
-    }
-
-    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
@@ -215,8 +177,8 @@ class Date implements XmlSerializable
 
         $writer->writeAttributes([
             'nrVehicul' => $this->car_number,
-            'codTaraTransportator' => $this->transport_country_code,
-            'denumireTransportator' => $this->transport_name,
+            'codTaraOrgTransport' => $this->transport_country_code,
+            'denumireOrgTransport' => $this->transport_name,
             'dataTransport' => $this->transport_date,
         ]);
 
@@ -234,19 +196,7 @@ class Date implements XmlSerializable
 
         if ($this->transport_code) {
             $writer->writeAttributes([
-                'codTransportator' => $this->transport_code,
-            ]);
-        }
-
-        if ($this->code_ptf) {
-            $writer->writeAttributes([
-                'codPtf' => $this->code_ptf,
-            ]);
-        }
-
-        if ($this->cod_birou_vamal) {
-            $writer->writeAttributes([
-                'codBirouVamal' => $this->cod_birou_vamal,
+                'codOrgTransport' => $this->transport_code,
             ]);
         }
     }
