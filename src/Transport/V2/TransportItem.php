@@ -1,6 +1,6 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V2;
 
 use InvalidArgumentException;
 use Sabre\Xml\Writer;
@@ -8,13 +8,6 @@ use Sabre\Xml\XmlSerializable;
 
 class TransportItem implements XmlSerializable
 {
-    /**
-     * Crt number
-     *
-     * @var string
-     */
-    private $crt_number;
-
     /**
      * Tariff code
      *
@@ -77,18 +70,6 @@ class TransportItem implements XmlSerializable
      * @var string
      */
     private $refDeclarant;
-
-    /**
-     * Set the crt number
-     * @param string $crt_number
-     * @return self
-     */
-    public function setCrtNumber(string $crt_number): self
-    {
-        $this->crt_number = $crt_number;
-
-        return $this;
-    }
 
     /**
      * Set the tariff code
@@ -206,10 +187,6 @@ class TransportItem implements XmlSerializable
      */
     public function validate()
     {
-        if (!$this->crt_number) {
-            throw new InvalidArgumentException('Crt number is required!');
-        }
-
         if (!$this->tariff_code) {
             throw new InvalidArgumentException('Tariff code is required!');
         }
@@ -226,19 +203,19 @@ class TransportItem implements XmlSerializable
             throw new InvalidArgumentException('Quantity is required!');
         }
 
-        if (!$this->unit_of_measure_code) {
+        if (!($this->unit_of_measure_code)) {
             throw new InvalidArgumentException('Unit of measure is required!');
         }
 
-        if (!$this->net_weight) {
+        if (!($this->net_weight)) {
             throw new InvalidArgumentException('Net weight is required!');
         }
 
-        if (!$this->gross_weight) {
+        if (!($this->gross_weight)) {
             throw new InvalidArgumentException('Gross weight is required!');
         }
 
-        if (!$this->price_without_vat) {
+        if (!($this->price_without_vat)) {
             throw new InvalidArgumentException('Price is required!');
         }
     }
@@ -251,7 +228,6 @@ class TransportItem implements XmlSerializable
     public function xmlSerialize(Writer $writer): void
     {
         $writer->writeAttributes([
-            'nrCrt' => $this->crt_number,
             'codTarifar' => $this->tariff_code,
             'denumireMarfa' => $this->product_name,
             'codScopOperatiune' => $this->purpose_operation_code,

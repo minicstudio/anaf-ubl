@@ -2,27 +2,26 @@
 
 namespace MinicStudio\UBL\Tests;
 
-use Locale;
 use MinicStudio\UBL\Transport\Confirmare;
 use MinicStudio\UBL\Transport\Correction;
-use MinicStudio\UBL\Transport\Location;
-use MinicStudio\UBL\Transport\Notificare;
 use MinicStudio\UBL\Transport\NotificareAnterioare;
 use MinicStudio\UBL\Transport\Partner;
-use MinicStudio\UBL\Transport\Date;
 use MinicStudio\UBL\Transport\Delete;
-use MinicStudio\UBL\Transport\LoadingDock;
-use MinicStudio\UBL\Transport\Transport;
-use MinicStudio\UBL\Transport\TransportDocument;
-use MinicStudio\UBL\Transport\TransportItem;
-use MinicStudio\UBL\Transport\UnLoadingDock;
-use MinicStudio\UBL\Transport\VehicleModification;
+use MinicStudio\UBL\Transport\V2\Location;
+use MinicStudio\UBL\Transport\V2\Notificare;
+use MinicStudio\UBL\Transport\V2\LoadingDock;
+use MinicStudio\UBL\Transport\V2\Date;
+use MinicStudio\UBL\Transport\V2\Transport;
+use MinicStudio\UBL\Transport\V2\TransportDocument;
+use MinicStudio\UBL\Transport\V2\TransportItem;
+use MinicStudio\UBL\Transport\V2\UnLoadingDock;
+use MinicStudio\UBL\Transport\V2\VehicleModification;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test an UBL2.2 invoice document
  */
-class TransportTest extends TestCase
+class TransportTestV2 extends TestCase
 {
     private $schema = '../anaf-ubl/schema_ETR_v2_20221215.xsd';
 
@@ -104,14 +103,14 @@ class TransportTest extends TestCase
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
-        $outputXMLString = $generator->transport($transport);
+        $outputXMLString = $generator->transportV2($transport);
 
         // Create PHP Native DomDocument object, that can be
         // used to validate the generate XML
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/generated_files/NotificareTest.xml');
+        $dom->save('./tests/generated_files/NotificareTestV2.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
@@ -137,14 +136,14 @@ class TransportTest extends TestCase
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
-        $outputXMLString = $generator->transport($transport);
+        $outputXMLString = $generator->transportV2($transport);
 
         // Create PHP Native DomDocument object, that can be
         // used to validate the generate XML
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/generated_files/ConfirmareTest.xml');
+        $dom->save('./tests/generated_files/ConfirmareTestV2.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
@@ -168,21 +167,21 @@ class TransportTest extends TestCase
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
-        $outputXMLString = $generator->transport($transport);
+        $outputXMLString = $generator->transportV2($transport);
 
         // Create PHP Native DomDocument object, that can be
         // used to validate the generate XML
         $dom = new \DOMDocument;
         $dom->loadXML($outputXMLString);
 
-        $dom->save('./tests/generated_files/StergereTest.xml');
+        $dom->save('./tests/generated_files/StergereTestV2.xml');
 
         $this->assertEquals(true, $dom->schemaValidate($this->schema));
     }
 
     /**
      * Test modifVehicul
-     * @param \MinicStudio\UBL\Transport\VehicleModification
+     * @param \MinicStudio\UBL\Transport\V2\VehicleModification
      * @return void
      */
     public function testVehicleModificationXML()
@@ -201,7 +200,7 @@ class TransportTest extends TestCase
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
-        $outputXMLString = $generator->transport($transport);
+        $outputXMLString = $generator->transportV2($transport);
 
         // Create PHP Native DomDocument object, that can be
         // used to validate the generate XML
@@ -296,7 +295,7 @@ class TransportTest extends TestCase
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
         $generator = new \MinicStudio\UBL\Generator();
-        $outputXMLString = $generator->transport($transport);
+        $outputXMLString = $generator->transportV2($transport);
 
         // Create PHP Native DomDocument object, that can be
         // used to validate the generate XML

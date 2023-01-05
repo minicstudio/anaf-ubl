@@ -1,7 +1,9 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V2;
 
+use MinicStudio\UBL\Transport\Confirmare;
+use MinicStudio\UBL\Transport\Delete;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -22,6 +24,13 @@ class Transport implements XmlSerializable
      * @var string
      */
     private $refDeclarant;
+
+    /**
+     * Declarant reference
+     *
+     * @var string
+     */
+    private $declPostAvarie;
 
     /**
      * Notification
@@ -45,6 +54,13 @@ class Transport implements XmlSerializable
     private $delete;
 
     /**
+     * Vehicle modification
+     *
+     * @var string
+     */
+    private $vehicle_modification;
+
+    /**
      * Set the declarant code
      * @param string $codDeclarant
      * @return self
@@ -64,6 +80,18 @@ class Transport implements XmlSerializable
     public function setReferenceDeclarant(string $refDeclarant): self
     {
         $this->refDeclarant = $refDeclarant;
+
+        return $this;
+    }
+
+    /**
+     * Set the post accident declaration
+     * @param string $declPostAvarie
+     * @return self
+     */
+    public function setDeclPostAvarie(string $declPostAvarie): self
+    {
+        $this->declPostAvarie = $declPostAvarie;
 
         return $this;
     }
@@ -105,6 +133,18 @@ class Transport implements XmlSerializable
     }
 
     /**
+     * Set vehicle modification
+     * @param VehicleModification $vehicle_modification
+     * @return self
+     */
+    public function setVehicleModification(VehicleModification $vehicle_modification): self
+    {
+        $this->vehicle_modification = $vehicle_modification;
+
+        return $this;
+    }
+
+    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
@@ -127,13 +167,19 @@ class Transport implements XmlSerializable
         $this->validate();
 
         $writer->writeAttributes([
-            'xsi:schemaLocation' => 'mfp:anaf:dgti:eTransport:declaratie:v1',
+            'xsi:schemaLocation' => 'mfp:anaf:dgti:eTransport:declaratie:v2',
             'codDeclarant' => $this->codDeclarant,
         ]);
 
         if ($this->refDeclarant) {
             $writer->writeAttributes([
                 'refDeclarant' => $this->refDeclarant,
+            ]);
+        }
+
+        if ($this->declPostAvarie) {
+            $writer->writeAttributes([
+                'declPostAvarie' => $this->declPostAvarie,
             ]);
         }
 
@@ -152,6 +198,12 @@ class Transport implements XmlSerializable
         if ($this->delete) {
             $writer->write([
                 'stergere' => $this->delete,
+            ]);
+        }
+
+        if ($this->vehicle_modification) {
+            $writer->write([
+                'modifVehicul' => $this->vehicle_modification,
             ]);
         }
     }
