@@ -15,7 +15,7 @@ class Generator
      *
      * @var string
      */
-    public $currencyID;
+    public static $currencyID;
 
     /**
      * Validate the xml
@@ -39,7 +39,7 @@ class Generator
      * @param $currencyID
      * @return string
      */
-    public function invoice(Invoice $invoice, $currencyId = 'EUR'): string
+    public function static invoice(Invoice $invoice, $currencyId = 'EUR'): string
     {
         $this->currencyID = $currencyId;
 
