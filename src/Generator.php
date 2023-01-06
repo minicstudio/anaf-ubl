@@ -39,9 +39,9 @@ class Generator
      * @param $currencyID
      * @return string
      */
-    public function static invoice(Invoice $invoice, $currencyId = 'EUR'): string
+    public static function invoice(Invoice $invoice, $currencyId = 'EUR'): string
     {
-        $this->currencyID = $currencyId;
+        self::$currencyID = $currencyId;
 
         $xmlService = new Service();
 
