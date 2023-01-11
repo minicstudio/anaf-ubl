@@ -1,66 +1,66 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V1;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
-class Partner implements XmlSerializable
+class Confirmare implements XmlSerializable
 {
     /**
-     * Country code
+     * Uit
      *
      * @var string
      */
-    private $country_code;
+    private $uit;
 
     /**
-     * Partner code
+     * Confirmation type
      *
      * @var string
      */
-    private $code;
+    private $confirmation_type;
 
     /**
-     * Partner name
+     * Remarks
      *
      * @var string
      */
-    private $name;
+    private $remarks;
     
     /**
-     * Set the country code
-     * @param string $country_code
+     * Set the uit
+     * @param string $uit
      * @return self
      */
-    public function setCountryCode(string $country_code): self
+    public function setUit(string $uit): self
     {
-        $this->country_code = $country_code;
+        $this->uit = $uit;
 
         return $this;
     }
 
     /**
-     * Set the code
-     * @param string $code
+     * Set the confiramtion type
+     * @param string $confirmation_type
      * @return self
      */
-    public function setCode(string $code): self
+    public function setConfirmationType(string $confirmation_type): self
     {
-        $this->code = $code;
+        $this->confirmation_type = $confirmation_type;
 
         return $this;
     }
-
+    
     /**
-     * Set the name
-     * @param string $name
+     * Set remarks
+     * @param string $remarks
      * @return self
      */
-    public function setName(string $name): self
+    public function setRemarks(string $remarks): self
     {
-        $this->name = $name;
+        $this->remarks = $remarks;
 
         return $this;
     }
@@ -73,12 +73,12 @@ class Partner implements XmlSerializable
      */
     public function validate()
     {
-        if (!$this->country_code) {
-            throw new InvalidArgumentException('Country code is required!');
+        if (!$this->uit) {
+            throw new InvalidArgumentException('Uit is required!');
         }
 
-        if (!$this->name) {
-            throw new InvalidArgumentException('Name is required!');
+        if (!$this->confirmation_type) {
+            throw new InvalidArgumentException('Confirmation type is required!');
         }
     }
 
@@ -92,13 +92,13 @@ class Partner implements XmlSerializable
         $this->validate();
 
         $writer->writeAttributes([
-            'codTara' => $this->country_code,
-            'denumire' => $this->name,
+            'uit' => $this->uit,
+            'tipConfirmare' => $this->confirmation_type,
         ]);
 
-        if ($this->code) {
+        if ($this->remarks) {
             $writer->writeAttributes([
-                'cod' => $this->code,
+                'observatii' => $this->remarks,
             ]);
         }
     }

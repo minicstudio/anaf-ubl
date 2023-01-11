@@ -1,66 +1,66 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V2;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
-class NotificareAnterioare implements XmlSerializable
+class LoadingDock implements XmlSerializable
 {
-     /**
-     * Uit
+    /**
+     * CodPtf
      *
      * @var string
      */
-    private $uit;
+    private $codPtf;
 
     /**
-     * Remarks
+     * codBirouVamal
      *
      * @var string
      */
-    private $remarks;
+    private $codBirouVamal;
 
     /**
-     * Post accident declaration
+     * Location
      *
      * @var string
      */
-    private $refDeclarant;
-    
+    private $location;
+
     /**
-     * Set the uit
-     * @param string $uit
+     * Set the codPtf
+     * @param string $codPtf
      * @return self
      */
-    public function setUit(string $uit): self
+    public function setCodPtf(string $codPtf): self
     {
-        $this->uit = $uit;
+        $this->codPtf = $codPtf;
 
         return $this;
     }
 
     /**
-     * Set the declarant reference
-     * @param string $refDeclarant
+     * Set the codBirouVamal
+     * @param string $codBirouVamal
      * @return self
      */
-    public function setReferenceDeclarant(string $refDeclarant): self
+    public function setCodBirouVamal(string $codBirouVamal): self
     {
-        $this->refDeclarant = $refDeclarant;
+        $this->codBirouVamal = $codBirouVamal;
 
         return $this;
     }
 
     /**
-     * Set remarks
-     * @param string $remarks
+     * Set the location
+     * @param Location $location
      * @return self
      */
-    public function setRemarks(string $remarks): self
+    public function setLocation(Location $location): self
     {
-        $this->remarks = $remarks;
+        $this->location = $location;
 
         return $this;
     }
@@ -73,8 +73,8 @@ class NotificareAnterioare implements XmlSerializable
      */
     public function validate()
     {
-        if (!$this->uit) {
-            throw new InvalidArgumentException('Uit is required!');
+        if (!$this->location) {
+            throw new InvalidArgumentException('Location is required!');
         }
     }
 
@@ -85,22 +85,20 @@ class NotificareAnterioare implements XmlSerializable
      */
     public function xmlSerialize(Writer $writer): void
     {
-        $this->validate();
+        if ($this->codPtf) {
+            $writer->writeAttributes([
+                'codPtf' => $this->codPtf,
+            ]);
+        }
 
-        $writer->writeAttributes([
-            'uit' => $this->uit,
+        if ($this->codBirouVamal) {
+            $writer->writeAttributes([
+                'codBirouVamal' => $this->codBirouVamal,
+            ]);
+        }
+
+        $writer->write([
+            'locatie' => $this->location,
         ]);
-
-        if ($this->refDeclarant) {
-            $writer->writeAttributes([
-                'refDeclarant' => $this->refDeclarant,
-            ]);
-        }
-
-        if ($this->remarks) {
-            $writer->writeAttributes([
-                'observatii' => $this->remarks,
-            ]);
-        }
     }
 }

@@ -1,7 +1,10 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V2;
 
+use MinicStudio\UBL\Transport\V1\Correction;
+use MinicStudio\UBL\Transport\V1\NotificareAnterioare;
+use MinicStudio\UBL\Transport\V1\Partner;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;

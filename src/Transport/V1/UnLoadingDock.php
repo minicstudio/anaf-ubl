@@ -1,15 +1,15 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V1;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
-class Location implements XmlSerializable
+class UnLoadingDock implements XmlSerializable
 {
     /**
-     * Country code
+     * County code
      *
      * @var string
      */
@@ -29,14 +29,7 @@ class Location implements XmlSerializable
      */
     private $street;
 
-    /**
-     * Post code
-     *
-     * @var string
-     */
-    private $post_code;
-
-    /**
+        /**
      * Address number
      *
      * @var string
@@ -77,6 +70,13 @@ class Location implements XmlSerializable
      * @var string
      */
     private $information;
+
+    /**
+     * Post code
+     *
+     * @var string
+     */
+    private $post_code;
     
     /**
      * Set county code
@@ -110,23 +110,11 @@ class Location implements XmlSerializable
     public function setStreet(string $street): self
     {
         $this->street = $street;
-
+ 
         return $this;
     }
-
-    /**
-     * Set the post code
-     * @param string $post_code
-     * @return self
-     */
-    public function setPostCode(string $post_code): self
-    {
-        $this->post_code = $post_code;
-
-        return $this;
-    }
-
-    /**
+ 
+     /**
      * Set the address number
      * @param string $address_number
      * @return self
@@ -199,6 +187,18 @@ class Location implements XmlSerializable
     }
 
     /**
+     * Set the post code
+     * @param string $post_code
+     * @return self
+     */
+    public function setPostCode(string $post_code): self
+    {
+        $this->post_code = $post_code;
+ 
+         return $this;
+    }
+
+    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
@@ -226,19 +226,11 @@ class Location implements XmlSerializable
      */
     public function xmlSerialize(Writer $writer): void
     {
-        $this->validate();
-
         $writer->writeAttributes([
             'codJudet' => $this->county_code,
             'denumireLocalitate' => $this->city,
             'denumireStrada' => $this->street,
         ]);
-
-        if ($this->post_code) {
-            $writer->writeAttributes([
-                'codPostal' => $this->post_code,
-            ]);
-        }
 
         if ($this->address_number) {
             $writer->writeAttributes([
@@ -251,24 +243,34 @@ class Location implements XmlSerializable
                 'bloc' => $this->block_number,
             ]);
         }
+
         if ($this->stairs) {
             $writer->writeAttributes([
                 'scara' => $this->stairs,
             ]);
         }
+
         if ($this->floor) {
             $writer->writeAttributes([
                 'etaj' => $this->floor,
             ]);
         }
+
         if ($this->apartment_number) {
             $writer->writeAttributes([
                 'apartament' => $this->apartment_number,
             ]);
         }
+
         if ($this->information) {
             $writer->writeAttributes([
                 'alteInfo' => $this->information,
+            ]);
+        }
+
+        if ($this->post_code) {
+            $writer->writeAttributes([
+                'codPostal' => $this->post_code,
             ]);
         }
     }

@@ -1,66 +1,66 @@
 <?php
 
-namespace MinicStudio\UBL\Transport;
+namespace MinicStudio\UBL\Transport\V1;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
-class LoadingDock implements XmlSerializable
+class NotificareAnterioare implements XmlSerializable
 {
-    /**
-     * CodPtf
+     /**
+     * Uit
      *
      * @var string
      */
-    private $codPtf;
+    private $uit;
 
     /**
-     * codBirouVamal
+     * Remarks
      *
      * @var string
      */
-    private $codBirouVamal;
+    private $remarks;
 
     /**
-     * Location
+     * Post accident declaration
      *
      * @var string
      */
-    private $location;
-
+    private $refDeclarant;
+    
     /**
-     * Set the codPtf
-     * @param string $codPtf
+     * Set the uit
+     * @param string $uit
      * @return self
      */
-    public function setCodPtf(string $codPtf): self
+    public function setUit(string $uit): self
     {
-        $this->codPtf = $codPtf;
+        $this->uit = $uit;
 
         return $this;
     }
 
     /**
-     * Set the codBirouVamal
-     * @param string $codBirouVamal
+     * Set the declarant reference
+     * @param string $refDeclarant
      * @return self
      */
-    public function setCodBirouVamal(string $codBirouVamal): self
+    public function setReferenceDeclarant(string $refDeclarant): self
     {
-        $this->codBirouVamal = $codBirouVamal;
+        $this->refDeclarant = $refDeclarant;
 
         return $this;
     }
 
     /**
-     * Set the location
-     * @param Location $location
+     * Set remarks
+     * @param string $remarks
      * @return self
      */
-    public function setLocation(Location $location): self
+    public function setRemarks(string $remarks): self
     {
-        $this->location = $location;
+        $this->remarks = $remarks;
 
         return $this;
     }
@@ -73,8 +73,8 @@ class LoadingDock implements XmlSerializable
      */
     public function validate()
     {
-        if (!$this->location) {
-            throw new InvalidArgumentException('Location is required!');
+        if (!$this->uit) {
+            throw new InvalidArgumentException('Uit is required!');
         }
     }
 
@@ -85,20 +85,22 @@ class LoadingDock implements XmlSerializable
      */
     public function xmlSerialize(Writer $writer): void
     {
-        if ($this->codPtf) {
-            $writer->writeAttributes([
-                'codPtf' => $this->codPtf,
-            ]);
-        }
+        $this->validate();
 
-        if ($this->codBirouVamal) {
-            $writer->writeAttributes([
-                'codBirouVamal' => $this->codBirouVamal,
-            ]);
-        }
-
-        $writer->write([
-            'locatie' => $this->location,
+        $writer->writeAttributes([
+            'uit' => $this->uit,
         ]);
+
+        if ($this->refDeclarant) {
+            $writer->writeAttributes([
+                'refDeclarant' => $this->refDeclarant,
+            ]);
+        }
+
+        if ($this->remarks) {
+            $writer->writeAttributes([
+                'observatii' => $this->remarks,
+            ]);
+        }
     }
 }
