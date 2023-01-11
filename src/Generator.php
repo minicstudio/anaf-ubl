@@ -116,10 +116,6 @@ class Generator
     {
         $xmlService = new Service();
 
-        $xmlService->namespaceMap = [
-            'Facturi' => '',
-        ];
-
         return $xmlService->write('Facturi', $sagaInvoice);
     }
 }
