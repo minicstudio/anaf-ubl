@@ -59,7 +59,7 @@ class SagaTest extends TestCase
             ->setInvoiceWeight('1234');
         
         // Line
-        $line = (new Line)
+        $lines = [(new Line)
             ->setLinieNrCrt('1')
             ->setSupplierItemCode('45678')
             ->setDescription('random')
@@ -70,24 +70,26 @@ class SagaTest extends TestCase
             ->setQuantity('10')
             ->setPrice('5')
             ->setValue('8')
-            ->setVat('19');
+            ->setVat('19')
+        ];
 
         // Content
         $content = (new Content)
-            ->setLine($line);
+            ->setLines($lines);
 
         // Detail
         $detail = (new Detail)
             ->setContent($content);
 
         // Factura
-        $factura = (new Factura)
+        $facturas = [(new Factura)
             ->setDetail($detail)
-            ->setHeader($header);
+            ->setHeader($header)
+        ];
 
         // Invoice
         $sagaInvoice = (new SagaInvoice())
-            ->setInvoice($factura);
+            ->setInvoices($facturas);
 
         // Test created object
         // Use \MinicStudio\UBL\Generator to generate an XML string
