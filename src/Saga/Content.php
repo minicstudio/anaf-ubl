@@ -28,6 +28,18 @@ class Content implements XmlSerializable
     }
 
     /**
+     * Set lines
+     * @param array $lines
+     * @return self
+     */
+    public function setLines(array $lines): self
+    {
+        $this->lines = array_merge($this->lines, $lines);
+
+        return $this;
+    }
+
+    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
