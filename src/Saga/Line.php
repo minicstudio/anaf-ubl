@@ -378,7 +378,7 @@ class Line implements XmlSerializable
             throw new InvalidArgumentException('Value is required!');
         }
 
-        if (!$this->vat) {
+        if (is_null($this->vat)) {
             throw new InvalidArgumentException('Vat is required!');
         }
     }
