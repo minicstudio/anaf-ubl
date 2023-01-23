@@ -212,6 +212,10 @@ class Notificare implements XmlSerializable
      */
     public function validate()
     {
+        if (!$this->operation_type_code) {
+            throw new InvalidArgumentException('Operation type code is not provided!');
+        }
+
         if (!count($this->items)) {
             throw new InvalidArgumentException('No items to transport.');
         }
@@ -224,20 +228,8 @@ class Notificare implements XmlSerializable
             throw new InvalidArgumentException('Date is required!');
         }
 
-        if (!$this->loading_dock) {
-            throw new InvalidArgumentException('Loading dock is not provided!');
-        }
-
-        if (!$this->un_loading_dock) {
-            throw new InvalidArgumentException('Un loading dock is not provided!');
-        }
-
         if (!count($this->documents)) {
             throw new InvalidArgumentException('No documents to transport.');
-        }
-
-        if (!$this->operation_type_code) {
-            throw new InvalidArgumentException('Operation type code is not provided!');
         }
     }
 
@@ -276,13 +268,17 @@ class Notificare implements XmlSerializable
             'dateTransport' => $this->date,
         ]);
 
-        $writer->write([
-            'locIncarcare' => $this->loading_dock,
-        ]);
+        if ($this->loading_dock) {
+            $writer->write([
+                'locIncarcare' => $this->loading_dock,
+            ]);
+        }
 
-        $writer->write([
-            'locDescarcare' => $this->un_loading_dock,
-        ]);
+        if ($this->un_loading_dock) {
+            $writer->write([
+                'locDescarcare' => $this->un_loading_dock,
+            ]);
+        }
 
         foreach ($this->documents as $document) {
             $writer->write([
