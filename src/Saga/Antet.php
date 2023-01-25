@@ -750,10 +750,6 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Provider registration number is required!');
         }
 
-        if (!$this->provider_capital) {
-            throw new InvalidArgumentException('Provider capital is required!');
-        }
-
         if (!$this->provider_country) {
             throw new InvalidArgumentException('Provider country name is required!');
         }
@@ -810,7 +806,7 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Client county name is required!');
         }
 
-        if (!$this->client_county) {
+        if (!$this->client_country) {
             throw new InvalidArgumentException('Client country name is required!');
         }
 
@@ -820,22 +816,6 @@ class Antet implements XmlSerializable
         
         if (!$this->client_address) {
             throw new InvalidArgumentException('Client address is required!');
-        }
-
-        if (!$this->client_bank) {
-            throw new InvalidArgumentException('Client bank is required!');
-        }
-
-        if (!$this->client_bank_account) {
-            throw new InvalidArgumentException('Client bank account number is required!');
-        }
-
-        if (!$this->client_phone) {
-            throw new InvalidArgumentException('Client phone number is required!');
-        }
-
-        if (!$this->client_email) {
-            throw new InvalidArgumentException('Client email is required!');
         }
 
         if (!$this->invoice_number) {
@@ -884,7 +864,6 @@ class Antet implements XmlSerializable
             'FurnizorNume' => $this->provider,
             'FurnizorCIF' => $this->provider_vat_number,
             'FurnizorNrRegCom' => $this->provider_registration_number,
-            'FurnizorCapital' => $this->provider_capital,
             'FurnizorTara' => $this->provider_country,
             'FurnizorLocalitate' => $this->provider_location,
             'FurnizorJudet' => $this->provider_county,
@@ -902,10 +881,6 @@ class Antet implements XmlSerializable
             'ClientTara' => $this->client_country,
             'ClientLocalitate' => $this->client_location,
             'ClientAdresa' => $this->client_address,
-            'ClientBanca' => $this->client_bank,
-            'ClientIBAN' => $this->client_bank_account,
-            'ClientTelefon' => $this->client_phone,
-            'ClientMail' => $this->client_email,
             'FacturaNumar' => $this->invoice_number,
             'FacturaData' => $this->invoice_date,
             'FacturaScadenta' => $this->invoice_due_date,
@@ -915,6 +890,12 @@ class Antet implements XmlSerializable
             'FacturaMoneda' => $this->invoice_currency,
             'FacturaGreutate' => $this->invoice_weight,
         ]);
+
+        if ($this->provider_capital) {
+            $writer->write([
+                'FurnizorCapital' => $this->provider_capital,
+            ]);
+        }
 
         if ($this->guid_code_client) {
             $writer->write([
@@ -946,148 +927,28 @@ class Antet implements XmlSerializable
             ]);
         }
 
-        // $writer->write([
-        //     'FurnizorCIF' => $this->provider_vat_number,
-        // ]);
+        if ($this->client_bank) {
+            $writer->write([
+                'ClientBanca' => $this->client_bank,
+            ]);
+        }
 
-        // $writer->write([
-        //     'FurnizorNrRegCom' => $this->provider_registration_number,
-        // ]);
+        if ($this->client_bank_account) {
+            $writer->write([
+                'ClientIBAN' => $this->client_bank_account,
+            ]);
+        }
 
-        // $writer->write([
-        //     'FurnizorCapital' => $this->provider_capital,
-        // ]);
+        if ($this->client_phone) {
+            $writer->write([
+                'ClientTelefon' => $this->client_phone,
+            ]);
+        }
 
-        // $writer->write([
-        //     'FurnizorTara' => $this->provider_country,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorLocalitate' => $this->provider_location,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorJudet' => $this->provider_county,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorAdresa' => $this->provider_address,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorTelefon' => $this->provider_phone,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorMail' => $this->provider_email,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorBanca' => $this->provider_bank,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorIBAN' => $this->provider_bank_account,
-        // ]);
-
-        // $writer->write([
-        //     'FurnizorInformatiiSuplimentare' => $this->provider_additional_information,
-        // ]);
-
-        // $writer->write([
-        //     'GUID_cod_client' => $this->guid_code_client,
-        // ]);
-
-        // $writer->write([
-        //     'ClientNume' => $this->client,
-        // ]);
-
-        // $writer->write([
-        //     'ClientInformatiiSuplimentare' => $this->client_additional_information,
-        // ]);
-
-        // $writer->write([
-        //     'ClientCIF' => $this->client_vat_number,
-        // ]);
-
-        // $writer->write([
-        //     'ClientNrRegCom' => $this->client_registration_number,
-        // ]);
-
-        // $writer->write([
-        //     'ClientJudet' => $this->client_county,
-        // ]);
-
-        // $writer->write([
-        //     'ClientTara' => $this->client_country,
-        // ]);
-
-        // $writer->write([
-        //     'ClientLocalitate' => $this->client_location,
-        // ]);
-
-        // $writer->write([
-        //     'ClientAdresa' => $this->client_address,
-        // ]);
-
-        // $writer->write([
-        //     'ClientBanca' => $this->client_bank,
-        // ]);
-
-        // $writer->write([
-        //     'ClientIBAN' => $this->client_bank_account,
-        // ]);
-
-        // $writer->write([
-        //     'ClientTelefon' => $this->client_phone,
-        // ]);
-
-        // $writer->write([
-        //     'ClientMail' => $this->client_email,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaNumar' => $this->invoice_number,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaData' => $this->invoice_date,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaScadenta' => $this->invoice_due_date,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaTaxareInversa' => $this->reverse_charge_invoice,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaTVAIncasare' => $this->factura_tva_incasare,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaTip' => $this->invoice_type,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaInformatiiSuplimentare' => $this->invoice_additional_information,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaMoneda' => $this->invoice_currency,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaGreutate' => $this->invoice_weight,
-        // ]);
-
-        // $writer->write([
-        //     'FacturaAccize' => $this->factura_accize,
-        // ]);
-
-        // $writer->write([
-        //     'Cod' => $this->code,
-        // ]);
+        if ($this->client_email) {
+            $writer->write([
+                'ClientMail' => $this->client_email,
+            ]);
+        }
     }
 }
