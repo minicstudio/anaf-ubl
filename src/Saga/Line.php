@@ -354,10 +354,6 @@ class Line implements XmlSerializable
             throw new InvalidArgumentException('Cont is required!');
         }
 
-        if (!$this->administration) {
-            throw new InvalidArgumentException('Administration is required!');
-        }
-
         if (!$this->additional_information) {
             throw new InvalidArgumentException('Additional information is required!');
         }
@@ -397,7 +393,6 @@ class Line implements XmlSerializable
             'CodArticolFurnizor' => $this->supplier_item_code,
             'Descriere' => $this->description,
             'Cont' => $this->cont,
-            'Gestiune' => $this->administration,
             'InformatiiSuplimentare' => $this->additional_information,
             'UM' => $this->unit_of_measure,
             'Cantitate' => $this->quantity,
@@ -409,6 +404,12 @@ class Line implements XmlSerializable
         if ($this->barcode) {
             $writer->write([
                 'CodBare' => $this->barcode,
+            ]);
+        }
+
+        if ($this->administration) {
+            $writer->write([
+                'Gestiune' => $this->administration,
             ]);
         }
 
