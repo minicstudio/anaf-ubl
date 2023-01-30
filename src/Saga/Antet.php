@@ -770,10 +770,6 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Provider phone number is required!');
         }
 
-        if (!$this->provider_email) {
-            throw new InvalidArgumentException('Provider email is required!');
-        }
-
         if (!$this->provider_bank) {
             throw new InvalidArgumentException('Provider bank is required!');
         }
@@ -869,7 +865,6 @@ class Antet implements XmlSerializable
             'FurnizorJudet' => $this->provider_county,
             'FurnizorAdresa' => $this->provider_address,
             'FurnizorTelefon' => $this->provider_phone,
-            'FurnizorMail' => $this->provider_email,
             'FurnizorBanca' => $this->provider_bank,
             'FurnizorIBAN' => $this->provider_bank_account,
             'FurnizorInformatiiSuplimentare' => $this->provider_additional_information,
@@ -894,6 +889,12 @@ class Antet implements XmlSerializable
         if ($this->provider_capital) {
             $writer->write([
                 'FurnizorCapital' => $this->provider_capital,
+            ]);
+        }
+
+        if ($this->provider_email) {
+            $writer->write([
+                'FurnizorMail' => $this->provider_email,
             ]);
         }
 
