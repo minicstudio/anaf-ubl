@@ -4,7 +4,7 @@ namespace MinicStudio\UBL\Transport\V2;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
-use SebastianBergmann\CodeCoverage\InvalidArgumentException;
+use InvalidArgumentException;
 
 class UnLoadingDock implements XmlSerializable
 {

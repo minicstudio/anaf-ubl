@@ -4,7 +4,7 @@ namespace MinicStudio\UBL\Saga;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
-use SebastianBergmann\CodeCoverage\InvalidArgumentException;
+use InvalidArgumentException;
 
 class Line implements XmlSerializable
 {
