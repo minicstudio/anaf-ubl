@@ -770,14 +770,6 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Provider phone number is required!');
         }
 
-        if (!$this->provider_bank) {
-            throw new InvalidArgumentException('Provider bank is required!');
-        }
-
-        if (!$this->provider_bank_account) {
-            throw new InvalidArgumentException('Provider bank account number is required!');
-        }
-
         if (!$this->provider_additional_information) {
             throw new InvalidArgumentException('Provider additional information is required!');
         }
@@ -841,10 +833,6 @@ class Antet implements XmlSerializable
         if (!$this->invoice_currency) {
             throw new InvalidArgumentException('Invoice currency is required!');
         }
-
-        if (!$this->invoice_weight) {
-            throw new InvalidArgumentException('Invoice weight is required!');
-        }
     }
 
     /**
@@ -865,8 +853,6 @@ class Antet implements XmlSerializable
             'FurnizorJudet' => $this->provider_county,
             'FurnizorAdresa' => $this->provider_address,
             'FurnizorTelefon' => $this->provider_phone,
-            'FurnizorBanca' => $this->provider_bank,
-            'FurnizorIBAN' => $this->provider_bank_account,
             'FurnizorInformatiiSuplimentare' => $this->provider_additional_information,
             'ClientNume' => $this->client,
             'ClientInformatiiSuplimentare' => $this->client_additional_information,
@@ -883,7 +869,6 @@ class Antet implements XmlSerializable
             'FacturaTVAIncasare' => $this->factura_tva_incasare,
             'FacturaInformatiiSuplimentare' => $this->invoice_additional_information,
             'FacturaMoneda' => $this->invoice_currency,
-            'FacturaGreutate' => $this->invoice_weight,
         ]);
 
         if ($this->provider_capital) {
@@ -928,6 +913,18 @@ class Antet implements XmlSerializable
             ]);
         }
 
+        if ($this->provider_bank) {
+            $writer->write([
+                'FurnizorBanca' => $this->provider_bank,
+            ]);
+        }
+
+        if ($this->client_bank_account) {
+            $writer->write([
+                'FurnizorIBAN' => $this->provider_bank_account,
+            ]);
+        }
+
         if ($this->client_bank) {
             $writer->write([
                 'ClientBanca' => $this->client_bank,
@@ -949,6 +946,12 @@ class Antet implements XmlSerializable
         if ($this->client_email) {
             $writer->write([
                 'ClientMail' => $this->client_email,
+            ]);
+        }
+
+        if ($this->invoice_weight) {
+            $writer->write([
+                'FacturaGreutate' => $this->invoice_weight,
             ]);
         }
     }

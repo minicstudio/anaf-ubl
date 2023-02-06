@@ -32,8 +32,6 @@ class SagaTest extends TestCase
             ->setProviderCounty('HR')
             ->setProviderAddress('Test,12')
             ->setProviderPhoneNumber('0754324567')
-            ->setProviderBank('ING')
-            ->setProviderBankAccount('RO12345678')
             ->setProviderAdditionalInformation('random')
             ->setClient('Random srl')
             ->setClientAdditionalInformation('random')
@@ -49,8 +47,7 @@ class SagaTest extends TestCase
             ->setReverseChargeInvoice(true)
             ->setFacturaTVAIncasare(true)
             ->setInvoiceiAdditionalInformation('random')
-            ->setInvoiceiCurrency('RON')
-            ->setInvoiceWeight('1234');
+            ->setInvoiceiCurrency('RON');
         
         // Line
         $lines = [(new Line)
