@@ -758,10 +758,6 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Provider location name is required!');
         }
 
-        if (!$this->provider_county) {
-            throw new InvalidArgumentException('Provider county name is required!');
-        }
-
         if (!$this->provider_address) {
             throw new InvalidArgumentException('Provider address is required!');
         }
@@ -788,10 +784,6 @@ class Antet implements XmlSerializable
 
         if (!$this->client_registration_number) {
             throw new InvalidArgumentException('Client registration number is required!');
-        }
-
-        if (!$this->client_county) {
-            throw new InvalidArgumentException('Client county name is required!');
         }
 
         if (!$this->client_country) {
@@ -850,7 +842,6 @@ class Antet implements XmlSerializable
             'FurnizorNrRegCom' => $this->provider_registration_number,
             'FurnizorTara' => $this->provider_country,
             'FurnizorLocalitate' => $this->provider_location,
-            'FurnizorJudet' => $this->provider_county,
             'FurnizorAdresa' => $this->provider_address,
             'FurnizorTelefon' => $this->provider_phone,
             'FurnizorInformatiiSuplimentare' => $this->provider_additional_information,
@@ -858,7 +849,6 @@ class Antet implements XmlSerializable
             'ClientInformatiiSuplimentare' => $this->client_additional_information,
             'ClientCIF' => $this->client_vat_number,
             'ClientNrRegCom' => $this->client_registration_number,
-            'ClientJudet' => $this->client_county,
             'ClientTara' => $this->client_country,
             'ClientLocalitate' => $this->client_location,
             'ClientAdresa' => $this->client_address,
@@ -907,6 +897,18 @@ class Antet implements XmlSerializable
             ]);
         }
 
+        if ($this->provider_county) {
+            $writer->write([
+                'FurnizorJudet' => $this->provider_county,
+            ]);
+        }
+
+        if ($this->client_county) {
+            $writer->write([
+                'ClientJudet' => $this->client_county,
+            ]);
+        }
+
         if ($this->guid_code_client_client) {
             $writer->write([
                 'GUID_cod_client_client' => $this->guid_code_client_client,
@@ -919,7 +921,7 @@ class Antet implements XmlSerializable
             ]);
         }
 
-        if ($this->client_bank_account) {
+        if ($this->provider_bank_account) {
             $writer->write([
                 'FurnizorIBAN' => $this->provider_bank_account,
             ]);
