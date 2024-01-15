@@ -4,7 +4,7 @@ A modern object-oriented PHP library to create valid UBL files. Please feel free
 
 ## Installation and usage
 
-This package requires PHP 8.0 or higher. Installation can be done through [composer](https://www.getcomposer.org).
+This package requires PHP 8.3 or higher. Installation can be done through [composer](https://www.getcomposer.org).
 
 The package has to be added manually into the `composer.json` file
 ```json

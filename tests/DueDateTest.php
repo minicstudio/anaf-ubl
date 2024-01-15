@@ -66,6 +66,8 @@ class DueDateTest extends TestCase
             ->setItem($productItem)
             ->setPrice($price)
             ->setTaxTotal($lineTaxTotal)
+            ->setLineExtensionAmount(10)
+            ->setUnitCode(\MinicStudio\UBL\Invoice\UnitCode::UNIT)
             ->setInvoicedQuantity(1);
 
         $invoiceLines = [$invoiceLine];

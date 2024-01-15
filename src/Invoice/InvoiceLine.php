@@ -2,6 +2,7 @@
 
 namespace MinicStudio\UBL\Invoice;
 
+use InvalidArgumentException;
 use MinicStudio\UBL\Generator;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
@@ -34,7 +35,7 @@ class InvoiceLine implements XmlSerializable
      *
      * @var string
      */
-    private $unitCode = 'MON';
+    private $unitCode;
 
     /**
      * Total tax
@@ -284,12 +285,39 @@ class InvoiceLine implements XmlSerializable
     }
 
     /**
+     * The validate function that is called during xml writing to valid the data of the object.
+     *
+     * @return void
+     * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
+     */
+    public function validate()
+    {
+        if ($this->item === null) {
+            throw new InvalidArgumentException('Missing item.');
+        }
+
+        if ($this->invoicedQuantity === 0) {
+            throw new InvalidArgumentException('Missing qunatity.');
+        }
+
+        if ($this->unitCode === null) {
+            throw new InvalidArgumentException('Missing unit code.');
+        }
+
+        if ($this->lineExtensionAmount === 0) {
+            throw new InvalidArgumentException('Missing line extension amount.');
+        }
+    }
+
+    /**
      * The xmlSerialize method is called during xml writing.
      * @param Writer $writer
      * @return void
      */
     public function xmlSerialize(Writer $writer): void
     {
+        $this->validate();
+
         $writer->write([
             Schema::CBC . 'ID' => $this->id
         ]);
@@ -316,26 +344,31 @@ class InvoiceLine implements XmlSerializable
                 ]
             ]
         ]);
+
         if ($this->accountingCostCode !== null) {
             $writer->write([
                 Schema::CBC . 'AccountingCostCode' => $this->accountingCostCode
             ]);
         }
+
         if ($this->accountingCost !== null) {
             $writer->write([
                 Schema::CBC . 'AccountingCost' => $this->accountingCost
             ]);
         }
+    
         if ($this->invoicePeriod !== null) {
             $writer->write([
                 Schema::CAC . 'InvoicePeriod' => $this->invoicePeriod
             ]);
         }
+
         if ($this->taxTotal !== null) {
             $writer->write([
                 Schema::CAC . 'TaxTotal' => $this->taxTotal
             ]);
         }
+
         $writer->write([
             Schema::CAC . 'Item' => $this->item,
         ]);
