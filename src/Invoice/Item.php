@@ -140,15 +140,15 @@ class Item implements XmlSerializable
      */
     public function xmlSerialize(Writer $writer): void
     {
-        $writer->write([
-            Schema::CBC . 'Name' => $this->name
-        ]);
-
         if ($this->description) {
             $writer->write([
                 Schema::CBC . 'Description' => $this->description,
             ]);
         }
+        
+        $writer->write([
+            Schema::CBC . 'Name' => $this->name
+        ]);
 
         if (!empty($this->getBuyersItemIdentification())) {
             $writer->write([
