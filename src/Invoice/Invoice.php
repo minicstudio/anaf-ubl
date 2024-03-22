@@ -193,6 +193,13 @@ class Invoice implements XmlSerializable
     private $contractDocumentReference;
 
     /**
+     * Despatch document reference
+     *
+     * @var DespatchDocumentReference
+     */
+    private $despatchDocumentReference;
+
+    /**
      * @return string
      */
     public function getUBLVersionID(): ?string
@@ -647,6 +654,24 @@ class Invoice implements XmlSerializable
     }
 
     /**
+     * @return DespatchDocumentReference
+     */
+    public function getDespatchDocumentReference(): ?DespatchDocumentReference
+    {
+        return $this->despatchDocumentReference;
+    }
+
+    /**
+     * @param string $DespatchDocumentReference
+     * @return Invoice
+     */
+    public function setDespatchDocumentReference(DespatchDocumentReference $despatchDocumentReference): Invoice
+    {
+        $this->despatchDocumentReference = $despatchDocumentReference;
+        return $this;
+    }
+
+    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @return void
@@ -751,6 +776,12 @@ class Invoice implements XmlSerializable
         if ($this->contractDocumentReference !== null) {
             $writer->write([
                 Schema::CAC . 'ContractDocumentReference' => $this->contractDocumentReference,
+            ]);
+        }
+
+        if ($this->despatchDocumentReference !== null) {
+            $writer->write([
+                Schema::CAC . 'DespatchDocumentReference' => $this->despatchDocumentReference,
             ]);
         }
 
