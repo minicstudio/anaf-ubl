@@ -66,6 +66,13 @@ class InvoiceLine implements XmlSerializable
     private $item;
 
     /**
+     * Allowance charge
+     *
+     * @var array
+     */
+    private $allowanceCharges;
+
+    /**
      * Price
      *
      * @var Price
@@ -209,6 +216,24 @@ class InvoiceLine implements XmlSerializable
     public function setItem(Item $item): InvoiceLine
     {
         $this->item = $item;
+        return $this;
+    }
+
+    /**
+     * @return AllowanceCharge[]
+     */
+    public function getAllowanceCharges(): ?array
+    {
+        return $this->allowanceCharges;
+    }
+
+    /**
+     * @param AllowanceCharge[] $allowanceCharges
+     * @return Price
+     */
+    public function setAllowanceCharges(array $allowanceCharges): Price
+    {
+        $this->allowanceCharges = $allowanceCharges;
         return $this;
     }
 
@@ -372,6 +397,14 @@ class InvoiceLine implements XmlSerializable
         $writer->write([
             Schema::CAC . 'Item' => $this->item,
         ]);
+
+        if ($this->allowanceCharges !== null) {
+            foreach ($this->allowanceCharges as $allowanceCharge) {
+                $writer->write([
+                    Schema::CAC . 'AllowanceCharge' => $allowanceCharge
+                ]);
+            }
+        }
 
         if ($this->price !== null) {
             $writer->write([
