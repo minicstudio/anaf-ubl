@@ -779,6 +779,12 @@ class Invoice implements XmlSerializable
             ]);
         }
 
+        if ($this->orderReference != null) {
+            $writer->write([
+                Schema::CAC . 'OrderReference' => $this->orderReference
+            ]);
+        }
+
         if ($this->despatchDocumentReference !== null) {
             $writer->write([
                 Schema::CAC . 'DespatchDocumentReference' => $this->despatchDocumentReference,
@@ -788,12 +794,6 @@ class Invoice implements XmlSerializable
         if ($this->invoicePeriod != null) {
             $writer->write([
                 Schema::CAC . 'InvoicePeriod' => $this->invoicePeriod
-            ]);
-        }
-
-        if ($this->orderReference != null) {
-            $writer->write([
-                Schema::CAC . 'OrderReference' => $this->orderReference
             ]);
         }
 
