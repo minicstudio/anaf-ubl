@@ -193,6 +193,13 @@ class Invoice implements XmlSerializable
     private $contractDocumentReference;
 
     /**
+     * Project reference
+     *
+     * @var ProjectReference
+     */
+    private $projectReference;
+
+    /**
      * Despatch document reference
      *
      * @var DespatchDocumentReference
@@ -654,6 +661,24 @@ class Invoice implements XmlSerializable
     }
 
     /**
+     * @return ProjectReference
+     */
+    public function getProjectReference(): ?ProjectReference
+    {
+        return $this->projectReference;
+    }
+
+    /**
+     * @param ProjectReference $projectReference
+     * @return Invoice
+     */
+    public function setProjectReference(ProjectReference $projectReference): Invoice
+    {
+        $this->projectReference = $projectReference;
+        return $this;
+    }
+
+    /**
      * @return DespatchDocumentReference
      */
     public function getDespatchDocumentReference(): ?DespatchDocumentReference
@@ -776,6 +801,12 @@ class Invoice implements XmlSerializable
         if ($this->contractDocumentReference !== null) {
             $writer->write([
                 Schema::CAC . 'ContractDocumentReference' => $this->contractDocumentReference,
+            ]);
+        }
+
+        if ($this->projectReference !== null) {
+            $writer->write([
+                Schema::CAC . 'ProjectReference' => $this->projectReference,
             ]);
         }
 
