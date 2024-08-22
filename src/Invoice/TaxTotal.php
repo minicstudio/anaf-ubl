@@ -68,13 +68,20 @@ class TaxTotal implements XmlSerializable
     }
 
     /**
+     * @return string|null
+     */
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    /**
      * @param string $currency
      * @return TaxTotal
      */
     public function setCurrency(string $currency): TaxTotal
     {
         $this->currency = $currency;
-
         return $this;
     }
 

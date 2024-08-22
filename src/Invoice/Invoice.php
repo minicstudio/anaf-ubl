@@ -111,9 +111,16 @@ class Invoice implements XmlSerializable
     /**
      * Tax total
      *
-     * @var array[TaxTotal]
+     * @var TaxTotal
      */
-    private array $taxTotal = [];
+    private $taxTotal;
+
+    /**
+     * Tax total
+     *
+     * @var TaxTotal
+     */
+    private $localTaxTotal;
 
     /**
      * Legal monetary total
@@ -493,7 +500,25 @@ class Invoice implements XmlSerializable
      */
     public function setTaxTotal(TaxTotal $taxTotal): Invoice
     {
-        $this->taxTotal[] = $taxTotal;
+        $this->taxTotal = $taxTotal;
+        return $this;
+    }
+
+    /**
+     * @return TaxTotal
+     */
+    public function getLocalTaxTotal(): ?TaxTotal
+    {
+        return $this->localTaxTotal;
+    }
+
+    /**
+     * @param TaxTotal $localTaxTotal
+     * @return Invoice
+     */
+    public function setLocalTaxTotal(TaxTotal $localTaxTotal): Invoice
+    {
+        $this->localTaxTotal = $localTaxTotal;
         return $this;
     }
 
@@ -899,12 +924,16 @@ class Invoice implements XmlSerializable
             }
         }
 
-        if (count($this->taxTotal) > 0) {
-            foreach ($this->taxTotal as $taxTotal) {
-                $writer->write([
-                    Schema::CAC . 'TaxTotal' => $taxTotal
-                ]);
-            }
+        if ($this->taxTotal !== null) {
+            $writer->write([
+                Schema::CAC . 'TaxTotal' => $this->taxTotal
+            ]);
+        }
+
+        if ($this->localTaxTotal !== null) {
+            $writer->write([
+                Schema::CAC . 'TaxTotal' => $this->localTaxTotal
+            ]);
         }
 
         $writer->write([
