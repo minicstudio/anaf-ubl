@@ -25,6 +25,13 @@ class TaxTotal implements XmlSerializable
     private $taxSubTotals = [];
 
     /**
+     * Currency
+     *
+     * @var string|null
+     */
+    private ?string $currency = null;
+
+    /**
      * @return mixed
      */
     public function getTaxAmount(): ?float
@@ -61,6 +68,17 @@ class TaxTotal implements XmlSerializable
     }
 
     /**
+     * @param string $currency
+     * @return TaxTotal
+     */
+    public function setCurrency(string $currency): TaxTotal
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @throws InvalidArgumentException An error with information about required data that is missing to write the XML
@@ -87,7 +105,7 @@ class TaxTotal implements XmlSerializable
                 'name' => Schema::CBC . 'TaxAmount',
                 'value' => number_format($this->taxAmount, 2, '.', ''),
                 'attributes' => [
-                    'currencyID' => Generator::$currencyID
+                    'currencyID' => $this->currency ?: Generator::$currencyID
                 ]
             ],
         ]);

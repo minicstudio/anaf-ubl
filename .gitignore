@@ -77,4 +77,5 @@ $RECYCLE.BIN/
 /tests/generated_files/*.xml
 
 # Test cache
+.phpunit.cache
 .phpunit.result.cache
