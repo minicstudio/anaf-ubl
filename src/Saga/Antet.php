@@ -746,10 +746,6 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Provider vat number is required!');
         }
 
-        if (!$this->provider_registration_number) {
-            throw new InvalidArgumentException('Provider registration number is required!');
-        }
-
         if (!$this->provider_country) {
             throw new InvalidArgumentException('Provider country name is required!');
         }
