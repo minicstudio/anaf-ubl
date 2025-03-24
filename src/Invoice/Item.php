@@ -43,6 +43,13 @@ class Item implements XmlSerializable
     private $classifiedTaxCategory;
 
     /**
+     * Commodity classification
+     *
+     * @var string
+     */
+    private $commodityClassification;
+
+    /**
      * @return string
      */
     public function getDescription(): ?string
@@ -133,6 +140,24 @@ class Item implements XmlSerializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getCommodityClassification(): ?string
+    {
+        return $this->commodityClassification;
+    }
+
+    /**
+     * @param mixed $commodityClassification
+     * @return Item
+     */
+    public function setCommodityClassification(?string $commodityClassification): Item
+    {
+        $this->commodityClassification = $commodityClassification;
+        return $this;
+    }
+
+    /**
      * The xmlSerialize method is called during xml writing.
      *
      * @param Writer $writer
@@ -145,7 +170,7 @@ class Item implements XmlSerializable
                 Schema::CBC . 'Description' => $this->description,
             ]);
         }
-        
+
         $writer->write([
             Schema::CBC . 'Name' => $this->name
         ]);
@@ -169,6 +194,20 @@ class Item implements XmlSerializable
         if (!empty($this->getClassifiedTaxCategory())) {
             $writer->write([
                 Schema::CAC . 'ClassifiedTaxCategory' => $this->getClassifiedTaxCategory()
+            ]);
+        }
+
+        if ($this->commodityClassification) {
+            $writer->write([
+                Schema::CAC . 'CommodityClassification' => [
+                    [
+                        'name' => Schema::CBC . 'ItemClassificationCode',
+                        'value' => $this->commodityClassification,
+                        'attributes' => [
+                            'listID' => 'STI'
+                        ]
+                    ],
+                ],
             ]);
         }
     }
