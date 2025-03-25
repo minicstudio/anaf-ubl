@@ -191,12 +191,6 @@ class Item implements XmlSerializable
             ]);
         }
 
-        if (!empty($this->getClassifiedTaxCategory())) {
-            $writer->write([
-                Schema::CAC . 'ClassifiedTaxCategory' => $this->getClassifiedTaxCategory()
-            ]);
-        }
-
         if ($this->commodityClassification) {
             $writer->write([
                 Schema::CAC . 'CommodityClassification' => [
@@ -208,6 +202,12 @@ class Item implements XmlSerializable
                         ]
                     ],
                 ],
+            ]);
+        }
+
+        if (!empty($this->getClassifiedTaxCategory())) {
+            $writer->write([
+                Schema::CAC . 'ClassifiedTaxCategory' => $this->getClassifiedTaxCategory()
             ]);
         }
     }
