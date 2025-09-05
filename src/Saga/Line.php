@@ -382,16 +382,26 @@ class Line implements XmlSerializable
 
         $writer->write([
             'LinieNrCrt' => $this->linie_nr_crt,
-            'CodArticolFurnizor' => $this->supplier_item_code,
             'Descriere' => $this->description,
             'Cont' => $this->cont,
-            'InformatiiSuplimentare' => $this->additional_information,
             'UM' => $this->unit_of_measure,
             'Cantitate' => $this->quantity,
             'Pret' => $this->price,
             'Valoare' => $this->value,
             'TVA' => $this->vat,
         ]);
+
+        if ($this->supplier_item_code) {
+            $writer->write([
+                'CodArticolFurnizor' => $this->supplier_item_code,
+            ]);
+        }
+
+        if ($this->additional_information) {
+            $writer->write([
+                'InformatiiSuplimentare' => $this->additional_information,
+            ]);
+        }
 
         if ($this->barcode) {
             $writer->write([
