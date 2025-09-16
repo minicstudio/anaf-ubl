@@ -214,14 +214,14 @@ class Antet implements XmlSerializable
     /**
      * Reverse charge invoice
      *
-     * @var bool
+     * @var string
      */
     private $reverse_charge_invoice;
 
     /**
      * FacturaTVAIncasare
      *
-     * @var bool
+     * @var string
      */
     private $factura_tva_incasare;
 
@@ -624,10 +624,10 @@ class Antet implements XmlSerializable
 
     /**
      * Set if the invoice is reverse charge or not
-     * @param bool $reverse_charge_invoice
+     * @param string $reverse_charge_invoice
      * @return self
      */
-    public function setReverseChargeInvoice(bool $reverse_charge_invoice): self
+    public function setReverseChargeInvoice(string $reverse_charge_invoice): self
     {
         $this->reverse_charge_invoice = $reverse_charge_invoice;
 
@@ -636,10 +636,10 @@ class Antet implements XmlSerializable
 
     /**
      * Set FacturaTVAIncasare
-     * @param bool $factura_tva_incasare
+     * @param string $factura_tva_incasare
      * @return self
      */
-    public function setFacturaTVAIncasare(bool $factura_tva_incasare): self
+    public function setFacturaTVAIncasare(string $factura_tva_incasare): self
     {
         $this->factura_tva_incasare = $factura_tva_incasare;
 
@@ -778,18 +778,6 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Client vat number is required!');
         }
 
-        if (!$this->client_country) {
-            throw new InvalidArgumentException('Client country name is required!');
-        }
-
-        if (!$this->client_location) {
-            throw new InvalidArgumentException('Client location name is required!');
-        }
-        
-        if (!$this->client_address) {
-            throw new InvalidArgumentException('Client address is required!');
-        }
-
         if (!$this->invoice_number) {
             throw new InvalidArgumentException('Invoice number is required!');
         }
@@ -803,10 +791,6 @@ class Antet implements XmlSerializable
         }
 
         if (!$this->reverse_charge_invoice) {
-            throw new InvalidArgumentException('You have to choose between yes or no!');
-        }
-
-        if (!$this->factura_tva_incasare) {
             throw new InvalidArgumentException('You have to choose between yes or no!');
         }
 
@@ -841,17 +825,43 @@ class Antet implements XmlSerializable
             'ClientInformatiiSuplimentare' => $this->client_additional_information,
             'ClientCIF' => $this->client_vat_number,
             'ClientNrRegCom' => $this->client_registration_number,
-            'ClientTara' => $this->client_country,
-            'ClientLocalitate' => $this->client_location,
-            'ClientAdresa' => $this->client_address,
             'FacturaNumar' => $this->invoice_number,
             'FacturaData' => $this->invoice_date,
             'FacturaScadenta' => $this->invoice_due_date,
             'FacturaTaxareInversa' => $this->reverse_charge_invoice,
-            'FacturaTVAIncasare' => $this->factura_tva_incasare,
             'FacturaInformatiiSuplimentare' => $this->invoice_additional_information,
             'FacturaMoneda' => $this->invoice_currency,
         ]);
+
+        if ($this->client_country) {
+            $writer->write([
+                'ClientTara' => $this->client_country,
+            ]);
+        }
+
+        if ($this->client_county) {
+            $writer->write([
+                'ClientJudet' => $this->client_county,
+            ]);
+        }
+
+        if ($this->client_location) {
+            $writer->write([
+                'ClientLocalitate' => $this->client_location,
+            ]);
+        }
+
+        if ($this->client_address) {
+            $writer->write([
+                'ClientAdresa' => $this->client_address,
+            ]);
+        }
+
+        if ($this->factura_tva_incasare) {
+            $writer->write([
+                'FacturaTVAIncasare' => $this->factura_tva_incasare,
+            ]);
+        }
 
         if ($this->provider_capital) {
             $writer->write([
@@ -892,12 +902,6 @@ class Antet implements XmlSerializable
         if ($this->provider_county) {
             $writer->write([
                 'FurnizorJudet' => $this->provider_county,
-            ]);
-        }
-
-        if ($this->client_county) {
-            $writer->write([
-                'ClientJudet' => $this->client_county,
             ]);
         }
 
