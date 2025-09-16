@@ -746,18 +746,6 @@ class Antet implements XmlSerializable
             throw new InvalidArgumentException('Provider vat number is required!');
         }
 
-        if (!$this->provider_country) {
-            throw new InvalidArgumentException('Provider country name is required!');
-        }
-
-        if (!$this->provider_location) {
-            throw new InvalidArgumentException('Provider location name is required!');
-        }
-
-        if (!$this->provider_address) {
-            throw new InvalidArgumentException('Provider address is required!');
-        }
-
         if (!$this->provider_phone) {
             throw new InvalidArgumentException('Provider phone number is required!');
         }
@@ -816,9 +804,6 @@ class Antet implements XmlSerializable
             'FurnizorNume' => $this->provider,
             'FurnizorCIF' => $this->provider_vat_number,
             'FurnizorNrRegCom' => $this->provider_registration_number,
-            'FurnizorTara' => $this->provider_country,
-            'FurnizorLocalitate' => $this->provider_location,
-            'FurnizorAdresa' => $this->provider_address,
             'FurnizorTelefon' => $this->provider_phone,
             'FurnizorInformatiiSuplimentare' => $this->provider_additional_information,
             'ClientNume' => $this->client,
@@ -854,6 +839,30 @@ class Antet implements XmlSerializable
         if ($this->client_address) {
             $writer->write([
                 'ClientAdresa' => $this->client_address,
+            ]);
+        }
+
+        if ($this->provider_country) {
+            $writer->write([
+                'FurnizorTara' => $this->provider_country,
+            ]);
+        }
+
+        if ($this->provider_county) {
+            $writer->write([
+                'FurnizorJudet' => $this->provider_county,
+            ]);
+        }
+
+        if ($this->provider_location) {
+            $writer->write([
+                'FurnizorLocalitate' => $this->provider_location,
+            ]);
+        }
+
+        if ($this->provider_address) {
+            $writer->write([
+                'FurnizorAdresa' => $this->provider_address,
             ]);
         }
 
@@ -896,12 +905,6 @@ class Antet implements XmlSerializable
         if ($this->code) {
             $writer->write([
                 'Cod' => $this->code,
-            ]);
-        }
-
-        if ($this->provider_county) {
-            $writer->write([
-                'FurnizorJudet' => $this->provider_county,
             ]);
         }
 
