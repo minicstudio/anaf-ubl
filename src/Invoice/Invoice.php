@@ -116,6 +116,13 @@ class Invoice implements XmlSerializable
     private $taxTotal;
 
     /**
+     * Tax total
+     *
+     * @var TaxTotal
+     */
+    private $localTaxTotal;
+
+    /**
      * Legal monetary total
      *
      * @var LegalMonetaryTotal
@@ -149,6 +156,13 @@ class Invoice implements XmlSerializable
      * @var Invoice
      */
     private $documentCurrencyCode = 'EUR';
+
+    /**
+     * Tax currency code
+     *
+     * @var string|null
+     */
+    private ?string $taxCurrencyCode = null;
 
     /**
      * Buyer refenrence
@@ -191,6 +205,20 @@ class Invoice implements XmlSerializable
      * @var ContractDocumentReference
      */
     private $contractDocumentReference;
+
+    /**
+     * Project reference
+     *
+     * @var ProjectReference
+     */
+    private $projectReference;
+
+    /**
+     * Despatch document reference
+     *
+     * @var DespatchDocumentReference
+     */
+    private $despatchDocumentReference;
 
     /**
      * @return string
@@ -300,6 +328,16 @@ class Invoice implements XmlSerializable
     public function setDocumentCurrencyCode(string $currencyCode = 'EUR'): Invoice
     {
         $this->documentCurrencyCode = $currencyCode;
+        return $this;
+    }
+
+    /**
+     * @param string $currencyCode
+     * @return Invoice
+     */
+    public function setTaxCurrencyCode(string $currencyCode): Invoice
+    {
+        $this->taxCurrencyCode = $currencyCode;
         return $this;
     }
 
@@ -444,7 +482,11 @@ class Invoice implements XmlSerializable
      */
     public function setPaymentMeans(PaymentMeans $paymentMeans): Invoice
     {
-        $this->paymentMeans = $paymentMeans;
+        if ($this->paymentMeans === null) {
+            $this->paymentMeans = [];
+        }
+
+        $this->paymentMeans[] = $paymentMeans;
         return $this;
     }
 
@@ -463,6 +505,24 @@ class Invoice implements XmlSerializable
     public function setTaxTotal(TaxTotal $taxTotal): Invoice
     {
         $this->taxTotal = $taxTotal;
+        return $this;
+    }
+
+    /**
+     * @return TaxTotal
+     */
+    public function getLocalTaxTotal(): ?TaxTotal
+    {
+        return $this->localTaxTotal;
+    }
+
+    /**
+     * @param TaxTotal $localTaxTotal
+     * @return Invoice
+     */
+    public function setLocalTaxTotal(TaxTotal $localTaxTotal): Invoice
+    {
+        $this->localTaxTotal = $localTaxTotal;
         return $this;
     }
 
@@ -647,6 +707,42 @@ class Invoice implements XmlSerializable
     }
 
     /**
+     * @return ProjectReference
+     */
+    public function getProjectReference(): ?ProjectReference
+    {
+        return $this->projectReference;
+    }
+
+    /**
+     * @param ProjectReference $projectReference
+     * @return Invoice
+     */
+    public function setProjectReference(ProjectReference $projectReference): Invoice
+    {
+        $this->projectReference = $projectReference;
+        return $this;
+    }
+
+    /**
+     * @return DespatchDocumentReference
+     */
+    public function getDespatchDocumentReference(): ?DespatchDocumentReference
+    {
+        return $this->despatchDocumentReference;
+    }
+
+    /**
+     * @param string $DespatchDocumentReference
+     * @return Invoice
+     */
+    public function setDespatchDocumentReference(DespatchDocumentReference $despatchDocumentReference): Invoice
+    {
+        $this->despatchDocumentReference = $despatchDocumentReference;
+        return $this;
+    }
+
+    /**
      * The validate function that is called during xml writing to valid the data of the object.
      *
      * @return void
@@ -736,6 +832,12 @@ class Invoice implements XmlSerializable
             Schema::CBC . 'DocumentCurrencyCode' => $this->documentCurrencyCode,
         ]);
 
+        if ($this->taxCurrencyCode !== null) {
+            $writer->write([
+                Schema::CBC . 'TaxCurrencyCode' => $this->taxCurrencyCode
+            ]);
+        }
+
         if ($this->accountingCostCode !== null) {
             $writer->write([
                 Schema::CBC . 'AccountingCostCode' => $this->accountingCostCode
@@ -748,21 +850,33 @@ class Invoice implements XmlSerializable
             ]);
         }
 
+        if ($this->orderReference != null) {
+            $writer->write([
+                Schema::CAC . 'OrderReference' => $this->orderReference
+            ]);
+        }
+
+        if ($this->despatchDocumentReference !== null) {
+            $writer->write([
+                Schema::CAC . 'DespatchDocumentReference' => $this->despatchDocumentReference,
+            ]);
+        }
+
         if ($this->contractDocumentReference !== null) {
             $writer->write([
                 Schema::CAC . 'ContractDocumentReference' => $this->contractDocumentReference,
             ]);
         }
 
-        if ($this->invoicePeriod != null) {
+        if ($this->projectReference !== null) {
             $writer->write([
-                Schema::CAC . 'InvoicePeriod' => $this->invoicePeriod
+                Schema::CAC . 'ProjectReference' => $this->projectReference,
             ]);
         }
 
-        if ($this->orderReference != null) {
+        if ($this->invoicePeriod != null) {
             $writer->write([
-                Schema::CAC . 'OrderReference' => $this->orderReference
+                Schema::CAC . 'InvoicePeriod' => $this->invoicePeriod
             ]);
         }
 
@@ -795,9 +909,11 @@ class Invoice implements XmlSerializable
         }
 
         if ($this->paymentMeans !== null) {
-            $writer->write([
-                Schema::CAC . 'PaymentMeans' => $this->paymentMeans
-            ]);
+            foreach ($this->paymentMeans as $paymentMean) {
+                $writer->write([
+                    Schema::CAC . 'PaymentMeans' => $paymentMean
+                ]);
+            }
         }
 
         if ($this->paymentTerms !== null) {
@@ -817,6 +933,12 @@ class Invoice implements XmlSerializable
         if ($this->taxTotal !== null) {
             $writer->write([
                 Schema::CAC . 'TaxTotal' => $this->taxTotal
+            ]);
+        }
+
+        if ($this->localTaxTotal !== null) {
+            $writer->write([
+                Schema::CAC . 'TaxTotal' => $this->localTaxTotal
             ]);
         }
 

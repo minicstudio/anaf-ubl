@@ -342,20 +342,12 @@ class Line implements XmlSerializable
             throw new InvalidArgumentException('LinieNrCrt is required!');
         }
 
-        if (!$this->supplier_item_code) {
-            throw new InvalidArgumentException('Supplier item code is required!');
-        }
-
         if (!$this->description) {
             throw new InvalidArgumentException('Description is required!');
         }
 
         if (!$this->cont) {
             throw new InvalidArgumentException('Cont is required!');
-        }
-
-        if (!$this->additional_information) {
-            throw new InvalidArgumentException('Additional information is required!');
         }
 
         if (!$this->unit_of_measure) {

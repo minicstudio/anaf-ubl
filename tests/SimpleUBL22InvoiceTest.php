@@ -50,11 +50,14 @@ class SimpleUBL22InvoiceTest extends TestCase
             ->setName('Product Name')
             ->setDescription('Product Description');
 
+        $itemPrice = 10;
+        $quantity = 5;
+
         // Price
         $price = (new \MinicStudio\UBL\Invoice\Price())
-            ->setBaseQuantity(1)
+            ->setBaseQuantity($quantity)
             ->setUnitCode(\MinicStudio\UBL\Invoice\UnitCode::UNIT)
-            ->setPriceAmount(10);
+            ->setPriceAmount($itemPrice);
 
         // Invoice Line tax totals
         $lineTaxTotal = (new \MinicStudio\UBL\Invoice\TaxTotal())
@@ -66,7 +69,9 @@ class SimpleUBL22InvoiceTest extends TestCase
             ->setItem($productItem)
             ->setPrice($price)
             ->setTaxTotal($lineTaxTotal)
-            ->setInvoicedQuantity(1);
+            ->setLineExtensionAmount($itemPrice * $quantity)
+            ->setUnitCode(\MinicStudio\UBL\Invoice\UnitCode::UNIT)
+            ->setInvoicedQuantity($quantity);
 
         $invoiceLines = [$invoiceLine];
 

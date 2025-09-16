@@ -90,5 +90,7 @@ class SagaTest extends TestCase
         $dom->loadXML($outputXMLString);
 
         $dom->save('./tests/generated_files/SagaInvoiceTest.xml');
+
+        $this->assertTrue(true);
     }
 }

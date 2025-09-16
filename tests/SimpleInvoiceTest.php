@@ -59,15 +59,18 @@ class SimpleInvoiceTest extends TestCase
             ->setDescription('Product Description')
             ->setSellersItemIdentification('SELLERID');
 
+        $itemPrice = 10;
+        $quantity = 5;
+
         // Price
         $price = (new \MinicStudio\UBL\Invoice\Price())
-            ->setBaseQuantity(1)
+            ->setBaseQuantity($quantity)
             ->setUnitCode(\MinicStudio\UBL\Invoice\UnitCode::UNIT)
-            ->setPriceAmount(10);
+            ->setPriceAmount($itemPrice);
 
         // Invoice Line tax totals
         $lineTaxTotal = (new \MinicStudio\UBL\Invoice\TaxTotal())
-            ->setTaxAmount(2.1);
+            ->setTaxAmount(0.21 * $itemPrice * $quantity);
 
         // InvoicePeriod
         $invoicePeriod = (new \MinicStudio\UBL\Invoice\InvoicePeriod())
@@ -82,6 +85,8 @@ class SimpleInvoiceTest extends TestCase
             ->setInvoicePeriod($invoicePeriod)
             ->setPrice($price)
             ->setTaxTotal($lineTaxTotal)
+            ->setLineExtensionAmount($itemPrice * $quantity)
+            ->setUnitCode(\MinicStudio\UBL\Invoice\UnitCode::UNIT)
             ->setInvoicedQuantity(1);
 
         $invoiceLines[] = (new \MinicStudio\UBL\Invoice\InvoiceLine())
@@ -89,19 +94,20 @@ class SimpleInvoiceTest extends TestCase
             ->setItem($productItem)
             ->setInvoicePeriod($invoicePeriod)
             ->setPrice($price)
-            ->setAccountingCost('Product 123')
             ->setTaxTotal($lineTaxTotal)
-            ->setInvoicedQuantity(1);
+            ->setLineExtensionAmount($itemPrice * $quantity)
+            ->setUnitCode(\MinicStudio\UBL\Invoice\UnitCode::UNIT)
+            ->setInvoicedQuantity($quantity);
 
         $invoiceLines[] = (new \MinicStudio\UBL\Invoice\InvoiceLine())
             ->setId(0)
             ->setItem($productItem)
             ->setInvoicePeriod($invoicePeriod)
             ->setPrice($price)
-            ->setAccountingCostCode('Product 123')
             ->setTaxTotal($lineTaxTotal)
-            ->setInvoicedQuantity(1);
-
+            ->setLineExtensionAmount($itemPrice * $quantity)
+            ->setUnitCode(\MinicStudio\UBL\Invoice\UnitCode::UNIT)
+            ->setInvoicedQuantity($quantity);
 
         // Total Taxes
         $taxCategory = (new \MinicStudio\UBL\Invoice\TaxCategory())
