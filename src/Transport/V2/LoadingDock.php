@@ -73,9 +73,7 @@ class LoadingDock implements XmlSerializable
      */
     public function validate()
     {
-        if (!$this->location) {
-            throw new InvalidArgumentException('Location is required!');
-        }
+        //
     }
 
     /**
@@ -97,8 +95,10 @@ class LoadingDock implements XmlSerializable
             ]);
         }
 
-        $writer->write([
-            'locatie' => $this->location,
-        ]);
+        if ($this->location) {
+            $writer->write([
+                'locatie' => $this->location,
+            ]);
+        }
     }
 }
